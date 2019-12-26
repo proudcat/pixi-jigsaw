@@ -1,71 +1,14 @@
-define(function () {
+define(function (require) {
 
-  function debounce(delay, atBegin, callback) {
-    return callback === undefined ? this.throttle(delay, atBegin, false) : this.throttle(delay, callback, atBegin !== false)
-  }
+  const util = require('./util')
 
   /**
-   * @see  https://github.com/niksy/throttle-debounce
-   * 
-   * throttle(300, function () {
-   *  // Throttled function
-   * });
+   * 视口，封装了一下canvas，用于屏幕自适应
    */
-  function throttle(delay, noTrailing, callback, debounceMode) {
-
-    let timeoutID
-
-    let lastExec = 0
-
-    if (typeof noTrailing !== 'boolean') {
-      debounceMode = callback
-      callback = noTrailing
-      noTrailing = undefined
-    }
-
-    function wrapper() {
-
-      let self = this
-      let elapsed = Number(new Date()) - lastExec
-      let args = arguments
-
-      function exec() {
-        lastExec = Number(new Date())
-        callback.apply(self, args)
-      }
-
-      function clear() {
-        timeoutID = undefined
-      }
-
-      if (debounceMode && !timeoutID) {
-        exec()
-      }
-
-      if (timeoutID) {
-        clearTimeout(timeoutID)
-      }
-
-      if (debounceMode === undefined && elapsed > delay) {
-        exec()
-
-      } else if (noTrailing !== true) {
-        timeoutID = setTimeout(debounceMode ? clear : exec, debounceMode === undefined ? delay - elapsed : delay)
-      }
-
-    }
-
-    wrapper.cancel = function () {
-      clearTimeout(timeoutID)
-    }
-
-    return wrapper
-  }
-
-  return class Viewport {
+  class Viewport {
     /**
      * 
-     * @param {*} options.aspectRatio   视口宽高比
+     * @param {*} options.aspectRatio   视口宽高比,用于在缩放视口的时候保持canvas宽高比例不变，防止拉伸变形.
      * @param {*} options.autofit   是否自动适配
      * @param {*} options.viewRect   视口显示区域
      */
@@ -80,10 +23,11 @@ define(function () {
       this.$canvas = document.querySelector('#game')
 
       if (this.options.autofit) {
-        window.addEventListener('resize', throttle(300, () => {
+        //当视口大小发生变化时候，自适应canvas大小，并且throttle一下为了提高效率和防止自适应过快发生抖动
+        window.addEventListener('resize', util.throttle(300, () => {
           this.resize(this.options.viewRect)
         }))
-        window.addEventListener('orientationchange', throttle(300, () => {
+        window.addEventListener('orientationchange', util.throttle(300, () => {
           this.resize(this.options.viewRect)
         }))
       }
@@ -93,10 +37,9 @@ define(function () {
 
     /**
      * 调整视口大小和位置
-     * @param aspectRatio {Number} [option] 游戏宽高比例
      * @param viewRect {Object} [option] {x:0,y:0,width:100,height:100}
      *    如果设置了值 则canvas显示在这个区域内
-     *    如果没设置值 则全屏显示并自适应
+     *    如果没设置值 则居中显示，并且宽或者高肯定会铺满屏，但是会保证宽高比，防止出现拉伸。
      */
     resize(viewRect) {
 
@@ -119,6 +62,7 @@ define(function () {
       let canvas_w
       let canvas_h
 
+      //这里看宽满屏就按照宽适配，高满屏则按照高适配
       if (ratio_w < ratio_h) {
         canvas_w = viewRect.width + 'px'
         canvas_h = viewRect.width / this.options.aspectRatio + 'px'
@@ -140,5 +84,7 @@ define(function () {
       })
     }
   }
+
+  return Viewport
 
 })

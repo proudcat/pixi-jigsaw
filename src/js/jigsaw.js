@@ -109,7 +109,7 @@ define(function () {
     constructor(level) {
       super()
 
-      //难度 2的话就是将图片切成2*2块 3的话就是3*3
+      //难度2的话就是将图片切成2*2块 3的话就是3*3
       this.level = level
       this.scale.set(1.4)
 
@@ -129,6 +129,9 @@ define(function () {
       this.createBack()
     }
 
+    /**
+     * 洗牌，随机生成图片位置
+     */
     shuffle() {
 
       let index = -1
@@ -148,7 +151,9 @@ define(function () {
       return result
     }
 
-    //创建切片
+    /**
+     * 创建切片
+     */
     createPieces() {
 
       let origin_tex = app.res.puzzle1.texture
@@ -162,6 +167,7 @@ define(function () {
 
       for (let ii = 0; ii < shuffled_index.length; ii++) {
 
+        //随机从大图中选一块当做切片
         let row = parseInt(shuffled_index[ii] / this.level)
         let col = shuffled_index[ii] % this.level
         let frame = new PIXI.Rectangle(col * this.piece_width, row * this.piece_height, this.piece_width, this.piece_height)
@@ -169,21 +175,27 @@ define(function () {
         let current_row = parseInt(ii / this.level)
         let current_col = ii % this.level
 
+        //切片的显示位置
         piece.x = current_col * this.piece_width - offset_x + GAP_SIZE * current_col
         piece.y = current_row * this.piece_height - offset_y + GAP_SIZE * current_row
 
         piece.events
           .on('dragstart', (picked) => {
+            //选中切片的时候 将切片置于最顶层，拖拽时候会显示于其他切片的顶层。
             this.pieces.removeChild(picked)
             this.select.addChild(picked)
           })
           .on('dragmove', (picked) => {
+            //检测是否可以和其他切片换位置
             this.checkHover(picked)
           })
           .on('dragend', (picked) => {
+
+            //还原切片层级
             this.select.removeChild(picked)
             this.pieces.addChild(picked)
 
+            //检测时候有可交换的切片，有就换之，没有则滚回原位
             let swapPiece = this.checkHover(picked)
             if (swapPiece) {
               let pickedIndex = picked.currentIndex
@@ -197,6 +209,7 @@ define(function () {
 
               swapPiece.tint = 0xFFFFFF
 
+              //检测游戏是否成功
               let success = this.checkSuccess()
               if (success) {
                 console.log('success')
@@ -240,6 +253,7 @@ define(function () {
         piece.tint = 0xFFFFFF
       })
 
+      //如果当前拖拽的切片位于其他切片之上则改变下底下切片的tint值
       if (overlap) {
         overlap.tint = 0xff0000
       }
@@ -247,6 +261,9 @@ define(function () {
       return overlap
     }
 
+    /**
+     * 创建背景层
+     */
     createBack() {
       const graphics = new PIXI.Graphics()
       this.pieces.children.forEach(piece => {
@@ -258,5 +275,6 @@ define(function () {
       })
     }
   }
+
   return Jigsaw
 })
