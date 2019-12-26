@@ -1,0 +1,44 @@
+{
+  "env": {
+    "browser": true,
+    "es6": true,
+    "node": true,
+    "amd": true
+  },
+  "extends": "eslint:recommended",
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaVersion": 2015
+  },
+  "rules": {
+    "linebreak-style": 0,
+    "quotes": [
+      "error",
+      "single"
+    ],
+    "semi": [
+      "error",
+      "never"
+    ],
+    "no-multiple-empty-lines": [
+      "warn",
+      {
+        "max": 2
+      }
+    ],
+    "no-console": "off",
+    "no-useless-escape": "off",
+    "no-var": "warn",
+    "no-const-assign": "warn",
+    "no-debugger": "warn",
+    "no-caller": "warn",
+    "no-eval": "error",
+    "no-new-func": "error",
+    "no-case-declarations": "off"
+  },
+  "globals": {
+    "PIXI": true,
+    "app": true,
+    "tweenjs": true
+  }
+}
