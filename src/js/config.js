@@ -10,18 +10,24 @@ define({
     height: 1280
   },
   resources: [{
-      name: 'puzzle1',
-      url: 'assets/image/puzzle1.png'
-    },
-    {
-      name: 'puzzle2',
-      url: 'assets/image/puzzle2.png'
-    }, {
-      name: 'puzzle3',
-      url: 'assets/image/puzzle3.png'
-    }, {
-      name: 'puzzle4',
-      url: 'assets/image/puzzle4.png'
-    }
+    name: 'puzzle1',
+    url: 'assets/image/puzzle1.png'
+  },
+  {
+    name: 'puzzle2',
+    url: 'assets/image/puzzle2.png'
+  }, {
+    name: 'puzzle3',
+    url: 'assets/image/puzzle3.png'
+  }, {
+    name: 'puzzle4',
+    url: 'assets/image/puzzle4.png'
+  }, {
+    name: 'puzzle5',
+    url: 'assets/image/puzzle5.png'
+  }, {
+    name: 'bg',
+    url: 'assets/image/bg.png'
+  }
   ]
 })

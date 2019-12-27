@@ -6,11 +6,13 @@ define(function (require) {
   const config = require('./config')
   const Viewport = require('./viewport')
   const Jigsaw = require('./jigsaw')
+  const loading = require('./loading')
 
   //定义游戏的层
   const layers = {
     back: new PIXI.Container(),
-    front: new PIXI.Container(),
+    board: new PIXI.Container(),
+    ui: new PIXI.Container()
   }
 
   /**
@@ -22,7 +24,6 @@ define(function (require) {
     const viewport = new Viewport({
       aspectRatio: config.meta.width / config.meta.height
     })
-
 
     window.app = new PIXI.Application({
       width: config.meta.width,
@@ -45,6 +46,8 @@ define(function (require) {
    */
   function load(baseUrl) {
 
+    loading.create(layers.ui)
+
     let loader = new PIXI.Loader(baseUrl)
     loader.defaultQueryString = `v=${config.meta.version}`
 
@@ -56,6 +59,7 @@ define(function (require) {
     loader
       .on('progress', (loader, res) => {
         console.log(`loading: ${parseInt(loader.progress)}, ${res.url}`)
+        loading.update(loader.progress)
       })
       .on('error', (err, ctx, res) => {
         console.warn(`load res failed:${res.url}`)
@@ -63,6 +67,7 @@ define(function (require) {
       })
       .load((loader, res) => {
         console.log('load res completed')
+        loading.destroy()
         app.res = res
         create()
       })
@@ -73,17 +78,19 @@ define(function (require) {
    */
   function create() {
 
-    let idol = new PIXI.Sprite(app.res.puzzle1.texture)
+    let idol = new PIXI.Sprite(app.res.puzzle5.texture)
     idol.x = config.meta.width / 2
-    idol.y = 20
+    idol.y = 345
+    idol.x = 196
     idol.anchor.set(0.5, 0)
+    idol.scale.set(0.37)
     app.stage.addChild(idol)
 
     //创建拼图模块
-    let jigsaw = new Jigsaw(2)
+    let jigsaw = new Jigsaw(3, app.res.puzzle5.texture)
     jigsaw.x = config.meta.width / 2
-    jigsaw.y = config.meta.height / 2 + 200
-    layers.front.addChild(jigsaw)
+    jigsaw.y = config.meta.height / 2
+    layers.board.addChild(jigsaw)
   }
 
   boot()

@@ -1,7 +1,7 @@
 define(function () {
 
   //切片之间显示的间隙
-  const GAP_SIZE = 4
+  const GAP_SIZE = 2
 
   /**
    * 图片切片类
@@ -106,28 +106,38 @@ define(function () {
    * 
    */
   class Jigsaw extends PIXI.Container {
-    constructor(level) {
+    constructor(level, texture) {
       super()
 
       //难度2的话就是将图片切成2*2块 3的话就是3*3
       this.level = level
-      this.moveCount = 0
-      this.scale.set(1.4)
+      this.texture = texture
 
-      //背景层，图片拖拽走后会漏出背景，画一些背景用于显示格子
+      //移动步数统计
+      this.moveCount = 0
+      // this.scale.set(1.4)
+
+      //背景层
       this.back = new PIXI.Container()
+      let bg = new PIXI.Sprite(app.res.bg.texture)
+      bg.anchor.set(0.5)
+      this.back.addChild(bg)
       this.addChild(this.back)
 
       //切片层
       this.pieces = new PIXI.Container()
+      this.pieces.y = 210
+      this.pieces.x = -4
       this.addChild(this.pieces)
+
 
       //前景层，选中的图片要悬浮于所有其他切片之上
       this.select = new PIXI.Container()
+      this.select.y = 210
+      this.select.x = -4
       this.addChild(this.select)
 
       this.createPieces()
-      this.createBack()
     }
 
     /**
@@ -157,12 +167,11 @@ define(function () {
      */
     createPieces() {
 
-      let origin_tex = app.res.puzzle1.texture
-      this.piece_width = origin_tex.orig.width / this.level
-      this.piece_height = origin_tex.orig.height / this.level
+      this.piece_width = this.texture.orig.width / this.level
+      this.piece_height = this.texture.orig.height / this.level
 
-      let offset_x = origin_tex.orig.width / 2
-      let offset_y = origin_tex.orig.height / 2
+      let offset_x = this.texture.orig.width / 2
+      let offset_y = this.texture.orig.height / 2
 
       let shuffled_index = this.shuffle()
 
@@ -172,7 +181,7 @@ define(function () {
         let row = parseInt(shuffled_index[ii] / this.level)
         let col = shuffled_index[ii] % this.level
         let frame = new PIXI.Rectangle(col * this.piece_width, row * this.piece_height, this.piece_width, this.piece_height)
-        let piece = new Piece(new PIXI.Texture(origin_tex, frame), ii, shuffled_index[ii])
+        let piece = new Piece(new PIXI.Texture(this.texture, frame), ii, shuffled_index[ii])
         let current_row = parseInt(ii / this.level)
         let current_col = ii % this.level
 
@@ -257,7 +266,7 @@ define(function () {
 
       //如果当前拖拽的切片位于其他切片之上则改变下底下切片的tint值
       if (overlap) {
-        overlap.tint = 0xff0000
+        overlap.tint = 0x00ffff
       }
 
       return overlap
@@ -266,16 +275,16 @@ define(function () {
     /**
      * 创建背景层
      */
-    createBack() {
-      const graphics = new PIXI.Graphics()
-      this.pieces.children.forEach(piece => {
-        graphics.lineStyle(2, 0xFEEB77, 1)
-        graphics.beginFill(0x650a5A)
-        graphics.drawRect(piece.x, piece.y, piece.width, piece.height)
-        graphics.endFill()
-        this.back.addChild(graphics)
-      })
-    }
+    // createBack() {
+    //   const graphics = new PIXI.Graphics()
+    //   this.pieces.children.forEach(piece => {
+    //     graphics.lineStyle(2, 0xFEEB77, 1)
+    //     graphics.beginFill(0x650a5A)
+    //     graphics.drawRect(piece.x, piece.y, piece.width, piece.height)
+    //     graphics.endFill()
+    //     this.back.addChild(graphics)
+    //   })
+    // }
   }
 
   return Jigsaw
