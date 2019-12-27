@@ -1,45 +1,46 @@
 <!DOCTYPE html>
 <html>
 
-  <head>
-    <meta charset="UTF-8">
-    <title>拼图游戏</title>
-    <style>
-      body {
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-        background: transparent;
-      }
+<head>
+  <meta charset="UTF-8">
+  <title>拼图游戏</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: transparent;
+    }
 
-      .container {
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-        position: relative;
-        width: 100%;
-        height: 100%;
-      }
+    .container {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
 
-      .autofit {
-        display: block;
-        padding: 0;
-        margin: auto;
-        left: 0;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        position: absolute;
-      }
-    </style>
-    <script type="text/javascript" src="lib/pixi.js" charset="utf-8"></script>
-    <script type="text/javascript" src="lib/require.js" charset="utf-8" data-main="js/main.js"></script>
-  </head>
+    .autofit {
+      display: block;
+      padding: 0;
+      margin: auto;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      position: absolute;
+    }
+  </style>
+</head>
 
-  <body>
-    <div class='container'>
-      <canvas id="game" class="autofit"></canvas>
-    </div>
-  </body>
+<body>
+  <div class='container'>
+    <canvas id="game" class="autofit"></canvas>
+  </div>
+
+  <script type="text/javascript" src="lib/pixi.js" charset="utf-8"></script>
+  <script type="text/javascript" src="lib/require.js" charset="utf-8" data-main="js/main.js"></script>
+</body>
 
 </html>

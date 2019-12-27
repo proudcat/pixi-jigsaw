@@ -9,7 +9,6 @@
   "devDependencies": {
     "async": "^2.6.1",
     "del": "^3.0.0",
-    "fontmin": "^0.9.7-beta",
     "glob": "^7.1.3",
     "gulp": "^4.0.0",
     "gulp-if": "^2.0.2",

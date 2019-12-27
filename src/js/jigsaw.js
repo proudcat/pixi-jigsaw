@@ -111,6 +111,7 @@ define(function () {
 
       //难度2的话就是将图片切成2*2块 3的话就是3*3
       this.level = level
+      this.moveCount = 0
       this.scale.set(1.4)
 
       //背景层，图片拖拽走后会漏出背景，画一些背景用于显示格子
@@ -198,6 +199,7 @@ define(function () {
             //检测时候有可交换的切片，有就换之，没有则滚回原位
             let swapPiece = this.checkHover(picked)
             if (swapPiece) {
+              this.moveCount++
               let pickedIndex = picked.currentIndex
               picked.x = swapPiece.x
               picked.y = swapPiece.y
@@ -212,7 +214,7 @@ define(function () {
               //检测游戏是否成功
               let success = this.checkSuccess()
               if (success) {
-                console.log('success')
+                console.log('success', this.moveCount)
               }
 
             } else {
