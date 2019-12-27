@@ -3,7 +3,7 @@
 
 ### 截屏
 
-![demo](E:\github\pixi-jigsaw\doc\demo.png)
+![demo](.\doc\demo.png)
 
 
 
