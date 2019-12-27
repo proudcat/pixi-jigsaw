@@ -3,7 +3,7 @@
 
 ### 截屏
 
-![demo](.\doc\demo.png)
+![demo](./doc/demo.png)
 
 
 
