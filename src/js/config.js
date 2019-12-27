@@ -10,21 +10,18 @@ define({
     height: 1280
   },
   resources: [{
-    name: 'puzzle1',
-    url: 'assets/image/puzzle1.png'
+    name: 'puzzle',
+    url: 'assets/image/puzzle.png'
   },
   {
-    name: 'puzzle2',
-    url: 'assets/image/puzzle2.png'
+    name: 'win',
+    url: 'assets/image/win.png'
   }, {
-    name: 'puzzle3',
-    url: 'assets/image/puzzle3.png'
+    name: 'fail',
+    url: 'assets/image/fail.png'
   }, {
-    name: 'puzzle4',
-    url: 'assets/image/puzzle4.png'
-  }, {
-    name: 'puzzle5',
-    url: 'assets/image/puzzle5.png'
+    name: 'button_get',
+    url: 'assets/image/button_get.png'
   }, {
     name: 'bg',
     url: 'assets/image/bg.png'

@@ -28,6 +28,9 @@ define(function () {
       //该切片目标(正确)位置的索引
       this.targetIndex = targetIndex
 
+      //游戏是否成功
+      this.success = false
+
       //让sprite可被点击
       this.interactive = true
 
@@ -126,18 +129,24 @@ define(function () {
 
       //切片层
       this.pieces = new PIXI.Container()
-      this.pieces.y = 210
+      this.pieces.y = 208
       this.pieces.x = -4
       this.addChild(this.pieces)
 
-
       //前景层，选中的图片要悬浮于所有其他切片之上
       this.select = new PIXI.Container()
-      this.select.y = 210
+      this.select.y = 208
       this.select.x = -4
       this.addChild(this.select)
 
       this.createPieces()
+
+      let idol = new PIXI.Sprite(app.res.puzzle.texture)
+      idol.y = -198
+      idol.x = -165
+      idol.anchor.set(0.5)
+      idol.scale.set(0.37)
+      this.addChild(idol)
     }
 
     /**
@@ -223,6 +232,7 @@ define(function () {
               //检测游戏是否成功
               let success = this.checkSuccess()
               if (success) {
+                this.success = true
                 console.log('success', this.moveCount)
               }
 
