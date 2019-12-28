@@ -4,6 +4,7 @@
 
 define(function (require) {
 
+  const Loading = require('./loading')
   const config = require('./config')
 
   class VideoAd extends PIXI.Container {
@@ -13,14 +14,14 @@ define(function (require) {
       this.visible = false
       this.events = new PIXI.utils.EventEmitter()
 
-      let bg = new PIXI.Graphics()
-      bg.moveTo(0, 0)
-      bg.beginFill(0x000000, 0.8)
-      bg.drawRect(-config.meta.width / 2, -config.meta.height / 2, config.meta.width, config.meta.height)
-      bg.interactive = true
-      this.addChild(bg)
+      this.bg = new PIXI.Graphics()
+      this.bg.moveTo(0, 0)
+      this.bg.beginFill(0x000000, 0.8)
+      this.bg.drawRect(-config.meta.width / 2, -config.meta.height / 2, config.meta.width, config.meta.height)
+      this.bg.interactive = true
+      this.addChild(this.bg)
 
-      let playButton = new PIXI.Graphics()
+      this.startButton = new PIXI.Graphics()
         .beginFill(0x0, 0.5)
         .drawRoundedRect(0, 0, 100, 100, 10)
         .endFill()
@@ -29,14 +30,13 @@ define(function (require) {
         .lineTo(36, 70)
         .lineTo(70, 50)
 
-      playButton.x = -playButton.width / 2
-      playButton.y = -playButton.height / 2
+      this.startButton.x = -this.startButton.width / 2
+      this.startButton.y = -this.startButton.height / 2
 
-      playButton.interactive = true
-      playButton.buttonMode = true
-      this.addChild(playButton)
-      playButton.on('pointertap', () => {
-        playButton.visible = false
+      this.startButton.interactive = true
+      this.startButton.buttonMode = true
+      this.addChild(this.startButton)
+      this.startButton.on('pointertap', () => {
         this.play()
       })
 
@@ -45,6 +45,7 @@ define(function (require) {
       }
     }
 
+    //正常通过pixi.js的loader加载视频，通过这个函数播放就可以，但是在微信浏览器pixi的loader无法加载video
     // play() {
     //   this.visible = false
     //   let video = app.res.ad.data
@@ -60,13 +61,22 @@ define(function (require) {
     //   video.play()
     // }
 
+    //解决微信浏览器下视频无法通过pixi的loader直接加载的问题
     play() {
+      this.startButton.visible = false
+      this.bg.visible = false
+
+      let loading = new Loading({
+        progress: false
+      })
+      this.addChild(loading)
+
       let video = document.createElement('video')
       video.src = 'assets/video/ad.mp4'
       video.className = 'autofit'
 
       video.onloadeddata = () => {
-        this.visible = false
+        loading.destroy()
         video.currentTime = 0
         app.viewport.$container.appendChild(video)
         app.viewport.resize()
@@ -75,6 +85,7 @@ define(function (require) {
       video.onended = () => {
         video.remove()
         this.events.emit('over')
+        this.destroy(true)
       }
 
       // video.load()
