@@ -121,11 +121,11 @@ define(function () {
       // this.scale.set(1.4)
 
       //背景层
-      this.back = new PIXI.Container()
-      let bg = new PIXI.Sprite(app.res.bg.texture)
-      bg.anchor.set(0.5)
-      this.back.addChild(bg)
-      this.addChild(this.back)
+      // this.back = new PIXI.Container()
+      // let bg = new PIXI.Sprite(app.res.bg.texture)
+      // bg.anchor.set(0.5)
+      // this.back.addChild(bg)
+      // this.addChild(this.back)
 
       //切片层
       this.pieces = new PIXI.Container()
@@ -140,13 +140,6 @@ define(function () {
       this.addChild(this.select)
 
       this.createPieces()
-
-      let idol = new PIXI.Sprite(texture)
-      idol.y = -198
-      idol.x = -165
-      idol.anchor.set(0.5)
-      idol.scale.set(0.37)
-      this.addChild(idol)
     }
 
     /**
@@ -214,7 +207,7 @@ define(function () {
             this.select.removeChild(picked)
             this.pieces.addChild(picked)
 
-            //检测时候有可交换的切片，有就换之，没有则滚回原位
+            //检测是否有可交换的切片，有就换之，没有则滚回原位
             let swapPiece = this.checkHover(picked)
             if (swapPiece) {
               this.moveCount++

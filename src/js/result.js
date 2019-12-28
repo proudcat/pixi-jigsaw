@@ -14,8 +14,6 @@ define(function (require) {
 
       _root = new PIXI.Container()
       _root.visible = false
-      _root.x = config.meta.width / 2
-      _root.y = config.meta.height / 2
 
       let bg = new PIXI.Graphics()
       bg.moveTo(0, 0)

@@ -12,8 +12,6 @@ define(function (require) {
       super()
       this.visible = false
       this.events = new PIXI.utils.EventEmitter()
-      this.x = config.meta.width / 2
-      this.y = config.meta.height / 2
 
       let bg = new PIXI.Graphics()
       bg.moveTo(0, 0)
@@ -38,6 +36,7 @@ define(function (require) {
       playButton.buttonMode = true
       this.addChild(playButton)
       playButton.on('pointertap', () => {
+        playButton.visible = false
         this.play()
       })
 
@@ -46,18 +45,39 @@ define(function (require) {
       }
     }
 
-    play() {
-      this.visible = false
-      let video = app.res.ad.data
-      app.viewport.$container.appendChild(video)
-      video.className = 'autofit'
-      app.viewport.resize()
+    // play() {
+    //   this.visible = false
+    //   let video = app.res.ad.data
+    //   app.viewport.$container.appendChild(video)
+    //   video.className = 'autofit'
+    //   app.viewport.resize()
 
-      video.onended = () => {
-        this.events.emit('over')
-        video.remove()
+    //   video.onended = () => {
+    //     this.events.emit('over')
+    //     video.remove()
+    //   }
+
+    //   video.play()
+    // }
+
+    play() {
+      let video = document.createElement('video')
+      video.src = 'assets/video/ad.mp4'
+      video.className = 'autofit'
+
+      video.onloadeddata = () => {
+        this.visible = false
+        video.currentTime = 0
+        app.viewport.$container.appendChild(video)
+        app.viewport.resize()
       }
 
+      video.onended = () => {
+        video.remove()
+        this.events.emit('over')
+      }
+
+      // video.load()
       video.play()
     }
 

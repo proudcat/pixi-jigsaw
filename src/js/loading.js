@@ -3,49 +3,64 @@
  */
 define(function (require) {
 
-  const config = require('./config')
+  // function randomColor() {
+  //   let letters = '0123456789ABCDEF'
+  //   let color = '0x'
+  //   for (let i = 0; i < 6; i++) {
+  //     color += letters[Math.floor(Math.random() * 16)]
+  //   }
+  //   return parseInt(color)
+  // }
 
-  let _spLoad1
-  let _spLoad2
-  let _mask
+  class Loading extends PIXI.Container {
 
-  return {
-    create: function (parent) {
+    constructor() {
+      super()
+      let arcAngle = Math.PI * 0.2
+      let gapAngle = Math.PI * 0.05
 
-      let preloader1 = PIXI.Texture.from('assets/image/preloader1.png')
-      _spLoad1 = new PIXI.Sprite(preloader1)
-      _spLoad1.anchor.set(0.5, 0.5)
-      _spLoad1.x = config.meta.width / 2
-      _spLoad1.y = config.meta.height / 2
-      parent.addChild(_spLoad1)
+      let offsetAngle = -arcAngle * 0.5
 
-      let preloader2 = PIXI.Texture.from('assets/image/preloader2.png')
-      _spLoad2 = new PIXI.Sprite(preloader2)
-      _spLoad2.anchor.set(0.5, 0.5)
-      _spLoad2.x = config.meta.width / 2
-      _spLoad2.y = config.meta.height / 2
-      parent.addChild(_spLoad2)
+      for (let i = 0; i < 8; i++) {
+        let arc = new PIXI.Graphics()
+        arc.lineStyle(16, 0xffffff, 1, 0.5)
+        arc.arc(0, 0, 80, offsetAngle + gapAngle * i + arcAngle * i, offsetAngle + arcAngle * (i + 1) + gapAngle * i)
+        this.addChild(arc)
+      }
 
-      _mask = new PIXI.Graphics()
-      _mask.moveTo(0, 0)
-      _mask.x = _spLoad1.x
-      _mask.y = _spLoad1.y - 7
-      parent.addChild(_mask)
-      _spLoad2.mask = _mask
-    },
+      let mask = new PIXI.Graphics()
+      this.addChild(mask)
 
-    update(progress) {
-      _mask.clear()
-      _mask.moveTo(0, 0)
-      _mask.beginFill(0xFFFF00, 1)
-      _mask.lineStyle(0, 0xff0000)
-      _mask.arc(0, 0, 50, -Math.PI / 2, -Math.PI / 2 + (progress / 100) * Math.PI * 2)
-      _mask.endFill()
-    },
+      this.indicatorText = new PIXI.Text('0%', new PIXI.TextStyle({
+        fontFamily: 'Arial',
+        fontSize: 20,
+        fill: '#ffffff',
+      }))
+      this.indicatorText.anchor.set(0.5)
+      this.addChild(this.indicatorText)
 
-    destroy: function () {
-      _spLoad1.destroy()
-      _spLoad2.destroy()
+      let maskIndex = 0
+
+      this.timer = setInterval(() => {
+        mask.clear()
+        mask.lineStyle(16, 0x000000, 0.5, 0.5)
+        mask.arc(0, 0, 80, offsetAngle + gapAngle * maskIndex + arcAngle * maskIndex, offsetAngle + arcAngle * (maskIndex + 1) + gapAngle * maskIndex)
+        maskIndex = (maskIndex + 1) % 8
+      }, 100)
+    }
+
+    /**
+     * @param {number} newValue
+     */
+    set progress(newValue) {
+      this.indicatorText.text = `${newValue}%`
+    }
+
+    destroy() {
+      clearInterval(this.timer)
+      super.destroy(true)
     }
   }
+
+  return Loading
 })

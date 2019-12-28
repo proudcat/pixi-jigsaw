@@ -6,10 +6,10 @@ define(function (require) {
   const Sound = require('./sound')
   const Viewport = require('./viewport')
   const Jigsaw = require('./jigsaw')
-  const config = require('./config')
-  const loading = require('./loading')
-  const result = require('./result')
+  const Loading = require('./loading')
   const VideoAd = require('./ad')
+  const config = require('./config')
+  const result = require('./result')
 
   //定义游戏的层
   const layers = {
@@ -52,14 +52,18 @@ define(function (require) {
       height: config.meta.height,
       backgroundColor: 0x666666,
       view: viewport.$canvas,
+      transparent: true
     })
 
     app.sound = new Sound()
     app.viewport = viewport
 
-    //层级加入到游戏场景中
+    //层级加入到游戏场景中,并将所有的层坐标设置为屏幕中心点
     for (const key in layers) {
-      app.stage.addChild(layers[key])
+      let layer = layers[key]
+      app.stage.addChild(layer)
+      layer.x = config.meta.width / 2
+      layer.y = config.meta.height / 2
     }
 
     load()
@@ -71,20 +75,18 @@ define(function (require) {
    */
   function load(baseUrl) {
 
-    loading.create(layers.ui)
+    let loading = new Loading()
+    layers.ui.addChild(loading)
 
     let loader = new PIXI.Loader(baseUrl)
     loader.defaultQueryString = `v=${config.meta.version}`
 
-    for (let i = 0; i < config.resources.length; i++) {
-      let resource = config.resources[i]
-      loader.add(resource)
-    }
+    config.resources.forEach(res => loader.add(res))
 
     loader
       .on('progress', (loader, res) => {
         console.log(`loading: ${parseInt(loader.progress)}, ${res.url}`)
-        loading.update(loader.progress)
+        loading.progress = loader.progress
       })
       .on('error', (err, ctx, res) => {
         console.warn(`load res failed:${res.url}`)
@@ -103,18 +105,29 @@ define(function (require) {
    */
   function create() {
 
-    //创建拼图参照图
-    _txt_time = new PIXI.Text(_countdown + '″', STYLE_WHITE)
-    _txt_time.anchor.set(0.5)
-    _txt_time.y = 484
-    _txt_time.x = 530
-    layers.ui.addChild(_txt_time)
+    //背景
+    let bg = new PIXI.Sprite(app.res.bg.texture)
+    bg.anchor.set(0.5)
+    layers.back.addChild(bg)
 
     //创建拼图模块
     _jigsaw = new Jigsaw(3, app.res.main.textures.puzzle)
-    _jigsaw.x = config.meta.width / 2
-    _jigsaw.y = config.meta.height / 2
     layers.board.addChild(_jigsaw)
+
+    //创建参考图
+    let idol = new PIXI.Sprite(app.res.main.textures.puzzle)
+    idol.y = -198
+    idol.x = -165
+    idol.anchor.set(0.5)
+    idol.scale.set(0.37)
+    layers.board.addChild(idol)
+
+    //创建倒计时文字
+    _txt_time = new PIXI.Text(_countdown + '″', STYLE_WHITE)
+    _txt_time.anchor.set(0.5)
+    _txt_time.x = 170
+    _txt_time.y = -156
+    layers.board.addChild(_txt_time)
 
     //创建结果页
     result.create(layers.ui)
@@ -135,16 +148,15 @@ define(function (require) {
         app.sound.stop('sound_bg')
         app.sound.play('sound_win')
         result.win()
-        return
-      }
-
-      _countdown--
-      _txt_time.text = _countdown + '″'
-      if (_countdown == 0) {
-        clearInterval(timer)
-        app.sound.stop('sound_bg')
-        app.sound.play('sound_fail')
-        result.fail()
+      } else {
+        _countdown--
+        _txt_time.text = _countdown + '″'
+        if (_countdown == 0) {
+          clearInterval(timer)
+          app.sound.stop('sound_bg')
+          app.sound.play('sound_fail')
+          result.fail()
+        }
       }
     }, 1000)
   }
