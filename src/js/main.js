@@ -3,12 +3,13 @@
  */
 define(function (require) {
 
-  const config = require('./config')
+  const Sound = require('./sound')
   const Viewport = require('./viewport')
   const Jigsaw = require('./jigsaw')
+  const config = require('./config')
   const loading = require('./loading')
   const result = require('./result')
-  const Sound = require('./sound')
+  const VideoAd = require('./ad')
 
   //定义游戏的层
   const layers = {
@@ -54,6 +55,7 @@ define(function (require) {
     })
 
     app.sound = new Sound()
+    app.viewport = viewport
 
     //层级加入到游戏场景中
     for (const key in layers) {
@@ -96,11 +98,13 @@ define(function (require) {
       })
   }
 
+
   /**
    * 创建游戏场景
    */
   function create() {
 
+    //创建拼图参照图
     _txt_time = new PIXI.Text(_countdown + '″', STYLE_WHITE)
     _txt_time.anchor.set(0.5)
     _txt_time.y = 484
@@ -113,10 +117,15 @@ define(function (require) {
     _jigsaw.y = config.meta.height / 2
     layers.board.addChild(_jigsaw)
 
+    //创建结果页
     result.create(layers.ui)
-    // result.fail()
 
-    start()
+    //创建广告
+    let ad = new VideoAd(layers.ui)
+    ad.events.on('over', () => {
+      start()
+    })
+    ad.show()
   }
 
   function start() {

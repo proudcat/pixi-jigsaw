@@ -34,6 +34,9 @@ define({
     }, {
       name: 'sound_fail',
       url: 'assets/audio/fail.mp3'
+    }, {
+      name: 'ad',
+      url: 'assets/video/ad.mp4'
     }
   ]
 })

@@ -1,3 +1,6 @@
+/**
+ * 游戏结果页面
+ */
 define(function (require) {
 
   const config = require('./config')
