@@ -8,6 +8,7 @@ define(function (require) {
   const Jigsaw = require('./jigsaw')
   const loading = require('./loading')
   const result = require('./result')
+  const Sound = require('./sound')
 
   //定义游戏的层
   const layers = {
@@ -19,13 +20,10 @@ define(function (require) {
   let _txt_time = 0
 
   //拼图倒计时
-  const TOTAL_TIME = 30  //单位 秒
+  const TOTAL_TIME = 30 //单位 秒
 
   //倒计时
   let _countdown = TOTAL_TIME
-
-  //倒计时秒表
-  let _timer
 
   //拼图模块
   let _jigsaw
@@ -54,6 +52,8 @@ define(function (require) {
       backgroundColor: 0x666666,
       view: viewport.$canvas,
     })
+
+    app.sound = new Sound()
 
     //层级加入到游戏场景中
     for (const key in layers) {
@@ -120,9 +120,12 @@ define(function (require) {
   }
 
   function start() {
-    _timer = setInterval(() => {
+    app.sound.play('sound_bg', true)
+    let timer = setInterval(() => {
       if (_jigsaw.success) {
-        clearInterval(_timer)
+        clearInterval(timer)
+        app.sound.stop('sound_bg')
+        app.sound.play('sound_win')
         result.win()
         return
       }
@@ -130,7 +133,9 @@ define(function (require) {
       _countdown--
       _txt_time.text = _countdown + '″'
       if (_countdown == 0) {
-        clearInterval(_timer)
+        clearInterval(timer)
+        app.sound.stop('sound_bg')
+        app.sound.play('sound_fail')
         result.fail()
       }
     }, 1000)

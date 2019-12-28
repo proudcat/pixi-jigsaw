@@ -81,7 +81,7 @@ function jsBundle(next) {
 }
 
 function concat(bundle) {
-  let libs = ['src/lib/pixi.js']
+  let libs = ['src/lib/pixi.js', 'src/lib/pixi-sound.js']
   let js = ''
   libs.forEach(lib => {
     js += fs.readFileSync(lib, 'utf8')
