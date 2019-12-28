@@ -8,7 +8,7 @@ define({
   meta: {
     name: '疯狂拼图',
     version: '1.0.0',
-    width: 720,
+    width: 796,
     height: 1280
   },
 
