@@ -26,7 +26,7 @@ define(function (require) {
 
       _win = new PIXI.Container()
       _win.visible = false
-      let win_icon = new PIXI.Sprite(app.res.win.texture)
+      let win_icon = new PIXI.Sprite(app.res.main.textures.win)
       win_icon.anchor.set(0.5)
       win_icon.y = -160
 
@@ -41,7 +41,7 @@ define(function (require) {
       win_text.anchor.set(0.5)
       _win.addChild(win_text)
 
-      let win_button = new PIXI.Sprite(app.res.button_get.texture)
+      let win_button = new PIXI.Sprite(app.res.main.textures.button_get)
       win_button.anchor.set(0.5)
       win_button.y = 80
       win_button.interactive = true
@@ -54,7 +54,7 @@ define(function (require) {
       _fail = new PIXI.Container()
       _fail.visible = false
 
-      let fail_icon = new PIXI.Sprite(app.res.fail.texture)
+      let fail_icon = new PIXI.Sprite(app.res.main.textures.fail)
       fail_icon.y = -200
       fail_icon.anchor.set(0.5)
       fail_icon.interactive = true

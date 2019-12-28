@@ -98,7 +98,6 @@ define(function (require) {
       })
   }
 
-
   /**
    * 创建游戏场景
    */
@@ -112,7 +111,7 @@ define(function (require) {
     layers.ui.addChild(_txt_time)
 
     //创建拼图模块
-    _jigsaw = new Jigsaw(3, app.res.puzzle.texture)
+    _jigsaw = new Jigsaw(3, app.res.main.textures.puzzle)
     _jigsaw.x = config.meta.width / 2
     _jigsaw.y = config.meta.height / 2
     layers.board.addChild(_jigsaw)

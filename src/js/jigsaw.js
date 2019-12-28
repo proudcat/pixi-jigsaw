@@ -141,7 +141,7 @@ define(function () {
 
       this.createPieces()
 
-      let idol = new PIXI.Sprite(app.res.puzzle.texture)
+      let idol = new PIXI.Sprite(texture)
       idol.y = -198
       idol.x = -165
       idol.anchor.set(0.5)

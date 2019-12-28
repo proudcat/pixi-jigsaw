@@ -10,33 +10,22 @@ define({
     height: 1280
   },
   resources: [{
-      name: 'puzzle',
-      url: 'assets/image/puzzle.png'
-    },
-    {
-      name: 'win',
-      url: 'assets/image/win.png'
-    }, {
-      name: 'fail',
-      url: 'assets/image/fail.png'
-    }, {
-      name: 'button_get',
-      url: 'assets/image/button_get.png'
-    }, {
-      name: 'bg',
-      url: 'assets/image/bg.png'
-    }, {
-      name: 'sound_bg',
-      url: 'assets/audio/bg.mp3'
-    }, {
-      name: 'sound_win',
-      url: 'assets/audio/win.mp3'
-    }, {
-      name: 'sound_fail',
-      url: 'assets/audio/fail.mp3'
-    }, {
-      name: 'ad',
-      url: 'assets/video/ad.mp4'
-    }
-  ]
+    name: 'main',
+    url: 'assets/image/main.json'
+  }, {
+    name: 'bg',
+    url: 'assets/image/bg.png'
+  }, {
+    name: 'sound_bg',
+    url: 'assets/audio/bg.mp3'
+  }, {
+    name: 'sound_win',
+    url: 'assets/audio/win.mp3'
+  }, {
+    name: 'sound_fail',
+    url: 'assets/audio/fail.mp3'
+  }, {
+    name: 'ad',
+    url: 'assets/video/ad.mp4'
+  }]
 })
