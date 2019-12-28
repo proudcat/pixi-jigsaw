@@ -3,13 +3,13 @@
  */
 define(function (require) {
 
+  const config = require('./config')
   const Sound = require('./sound')
   const Viewport = require('./viewport')
   const Jigsaw = require('./jigsaw')
   const Loading = require('./loading')
   const VideoAd = require('./ad')
-  const config = require('./config')
-  const result = require('./result')
+  const Result = require('./result')
 
   //定义游戏的层
   const layers = {
@@ -96,14 +96,14 @@ define(function (require) {
         console.log('load res completed')
         loading.destroy()
         app.res = res
-        create()
+        show()
       })
   }
 
   /**
    * 创建游戏场景
    */
-  function create() {
+  function show() {
 
     //背景
     let bg = new PIXI.Sprite(app.res.bg.texture)
@@ -129,18 +129,18 @@ define(function (require) {
     _txt_time.y = -156
     layers.board.addChild(_txt_time)
 
-    //创建结果页
-    result.create(layers.ui)
-
     //创建广告
     let ad = new VideoAd(layers.ui)
     ad.events.on('over', () => {
       start()
     })
-    ad.show()
   }
 
   function start() {
+
+    let result = new Result()
+    layers.ui.addChild(result)
+
     app.sound.play('sound_bg', true)
     let timer = setInterval(() => {
       if (_jigsaw.success) {

@@ -11,7 +11,6 @@ define(function (require) {
 
     constructor(parent) {
       super()
-      this.visible = false
       this.events = new PIXI.utils.EventEmitter()
 
       this.bg = new PIXI.Graphics()
@@ -91,11 +90,6 @@ define(function (require) {
       // video.load()
       video.play()
     }
-
-    show() {
-      this.visible = true
-    }
-
   }
 
   return VideoAd
