@@ -3,12 +3,19 @@
  * 配置游戏所需的资源和游戏相关信息
  */
 define({
+
+  //游戏基本信息
   meta: {
     name: '疯狂拼图',
     version: '1.0.0',
     width: 720,
     height: 1280
   },
+
+  //游戏难度
+  level: 3,
+
+  //游戏资源列表
   resources: [{
     name: 'main',
     url: 'assets/image/main.json'

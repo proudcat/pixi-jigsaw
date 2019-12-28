@@ -41,6 +41,8 @@ define(function (require) {
    */
   function boot() {
 
+    document.title = config.meta.name
+
     //创建视口
     const viewport = new Viewport({
       aspectRatio: config.meta.width / config.meta.height
@@ -111,7 +113,7 @@ define(function (require) {
     layers.back.addChild(bg)
 
     //创建拼图模块
-    _jigsaw = new Jigsaw(3, app.res.main.textures.puzzle)
+    _jigsaw = new Jigsaw(config.level, app.res.main.textures.puzzle)
     layers.board.addChild(_jigsaw)
 
     //创建参考图
