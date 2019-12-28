@@ -87,7 +87,7 @@ define(function (require) {
         this.destroy(true)
       }
 
-      // video.load()
+      video.load()
       video.play()
     }
   }
