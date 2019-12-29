@@ -29,7 +29,7 @@ function copyAssets() {
         return path.extname(file.relative) === '.png'
       },
       imagemin([imagemin.optipng({
-        optimizationLevel: 1
+        optimizationLevel: 3
       })], {
         verbose: true
       })))
