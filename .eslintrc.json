@@ -8,7 +8,7 @@
   "extends": "eslint:recommended",
   "parserOptions": {
     "sourceType": "module",
-    "ecmaVersion": 2015
+    "ecmaVersion": 8
   },
   "rules": {
     "linebreak-style": 0,
