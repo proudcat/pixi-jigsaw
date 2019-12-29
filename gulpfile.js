@@ -60,7 +60,14 @@ function jsBundle(next) {
       path: path.resolve(__dirname, 'dist'),
       filename: 'game.min.js',
     },
-    target: 'web'
+    target: 'web',
+    module: {
+      rules: [{
+        test: /\.js$/,
+        use: 'babel-loader',
+        exclude: /lib/
+      }]
+    }
   }
 
   const compiler = webpack(options)
