@@ -86,7 +86,5 @@ define(function (require) {
 			})
 		}
 	}
-
 	return Viewport
-
 })

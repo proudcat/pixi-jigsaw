@@ -72,7 +72,7 @@ define(function (require) {
 
       let video = document.createElement('video')
       video.src = 'assets/video/ad.mp4'
-      video.className = 'autofit'
+      video.className = 'fullscreen'
 
       video.onloadeddata = () => {
         loading.destroy()
