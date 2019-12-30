@@ -87,22 +87,22 @@ function jsBundle(next) {
     }
     let dest = path.join(options.output.path, options.output.filename)
     const bundle = memory.readFileSync(dest, 'utf-8')
-    // const js = concat(bundle)
-    fs.writeFileSync(dest, bundle, 'utf8')
+    const js = concat(bundle)
+    fs.writeFileSync(dest, js, 'utf8')
     next()
   })
 }
 
-// function concat(bundle) {
-//   let libs = ['src/lib/pixi.js', 'src/lib/pixi-sound.js']
-//   let js = ''
-//   libs.forEach(lib => {
-//     js += fs.readFileSync(lib, 'utf8')
-//     js += ';\n'
-//   })
-//   js += bundle
+function concat(bundle) {
+  let libs = ['src/lib/pixi.js', 'src/lib/pixi-sound.js']
+  let js = ''
+  libs.forEach(lib => {
+    js += fs.readFileSync(lib, 'utf8')
+    js += ';\n'
+  })
+  js += bundle
 
-//   return js
-// }
+  return js
+}
 
 exports.dist = series(clean, parallel(copyAssets, jsBundle, copyHtml))
