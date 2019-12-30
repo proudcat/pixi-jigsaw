@@ -40,6 +40,7 @@ define(function (require) {
       win_button.buttonMode = true
       win_button.on('pointertap', () => {
         console.log('win')
+        location.href = location.href.replace(/mobile(\d)/, 'mobile0')
       })
       this.$win.addChild(win_button)
 
@@ -52,6 +53,7 @@ define(function (require) {
       fail_icon.buttonMode = true
       fail_icon.on('pointertap', () => {
         console.log('fail')
+        location.href = location.href.replace(/mobile(\d)/, 'mobile0')
       })
       this.$fail.addChild(fail_icon)
 
@@ -79,8 +81,6 @@ define(function (require) {
       this.$win.visible = false
       this.$fail.visible = true
     }
-
   }
-
   return Result
 })
