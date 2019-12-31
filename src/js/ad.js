@@ -9,7 +9,7 @@ define(function (require) {
 
   class VideoAd extends PIXI.Container {
 
-    constructor(parent) {
+    constructor() {
       super()
       this.events = new PIXI.utils.EventEmitter()
 
@@ -38,10 +38,6 @@ define(function (require) {
       this.startButton.on('pointertap', () => {
         this.play()
       })
-
-      if (parent) {
-        parent.addChild(this)
-      }
     }
 
     //正常通过pixi.js的loader加载视频，通过这个函数播放就可以，但是在微信浏览器pixi的loader无法加载video

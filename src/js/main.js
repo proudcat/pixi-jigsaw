@@ -88,7 +88,8 @@ define(function (require) {
     layers.scene.addChild(scene)
 
     //创建广告
-    let ad = new VideoAd(layers.ui)
+    let ad = new VideoAd()
+    layers.ui.addChild(ad)
     ad.events.on('over', () => {
       scene.start()
     })
