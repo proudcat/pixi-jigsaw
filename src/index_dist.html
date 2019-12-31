@@ -1,58 +1,64 @@
 <!DOCTYPE html>
 <html>
 
-  <head>
-    <meta charset="UTF-8">
-    <title>拼图游戏</title>
-    <style>
-      body {
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-        background: transparent;
-      }
+<head>
+  <meta charset="UTF-8">
+  <title>拼图游戏</title>
+  <style>
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      padding: 0;
+      margin: 0;
+      overflow: hidden;
+      background: transparent;
+    }
 
-      .container {
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-        position: relative;
-        width: 100%;
-        height: 100%;
-      }
+    .container {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
 
-      .autofit {
-        display: block;
-        padding: 0;
-        margin: auto;
-        left: 0;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        position: absolute;
-      }
+    .autofit {
+      display: block;
+      padding: 0;
+      margin: auto;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+    }
 
-      .fullscreen {
-        display: block;
-        padding: 0;
-        margin: auto;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        left: 0;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        position: absolute;
-      }
-    </style>
-  </head>
+    .fullscreen {
+      display: block;
+      padding: 0;
+      margin: auto;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      position: absolute;
+    }
+  </style>
+</head>
 
-  <body>
-    <div class='container'>
-      <canvas id="game" class="autofit"></canvas>
-    </div>
-    <script type="text/javascript" src="game.min.js" charset="utf-8"></script>
-  </body>
+<body>
+  <div id='container' class='container'>
+    <canvas id="scene" style="position:relative"></canvas>
+  </div>
+  <script type="text/javascript" src="game.min.js" charset="utf-8"></script>
+</body>
 
 </html>
