@@ -32,6 +32,9 @@
       top: 0;
       right: 0;
       bottom: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
       position: absolute;
     }
 
@@ -52,8 +55,8 @@
 </head>
 
 <body>
-  <div class='container'>
-    <canvas id="game" class="autofit"></canvas>
+  <div id='container' class='container'>
+    <canvas id="scene" style="position:relative"></canvas>
   </div>
 
   <script type="text/javascript" src="lib/pixi.js" charset="utf-8"></script>

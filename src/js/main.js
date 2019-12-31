@@ -44,11 +44,8 @@ define(function (require) {
     document.title = config.meta.name
 
     //创建视口
-    const viewport = new Viewport({
-      aspectRatio: config.meta.width / config.meta.height
-    })
+    const viewport = new Viewport()
 
-    // window.devicePixelRatio
     window.app = new PIXI.Application({
       width: config.meta.width,
       height: config.meta.height,
@@ -56,6 +53,8 @@ define(function (require) {
       view: viewport.$canvas,
       transparent: true
     })
+
+    viewport.resize()
 
     app.sound = new Sound()
     app.viewport = viewport
