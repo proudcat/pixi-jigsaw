@@ -9,7 +9,6 @@ const fs = require('fs')
 const del = require('del')
 const argv = require('yargs').argv
 const path = require('path')
-const rename = require('gulp-rename')
 const gulpif = require('gulp-if')
 const imagemin = require('gulp-imagemin')
 const webpack = require('webpack')
@@ -22,7 +21,7 @@ function clean(next) {
 }
 
 function copyAssets() {
-  return src(['src/assets/**/*'], {
+  return src(['src/**/*', '!src/js/**'], {
       nodir: false
     })
     .pipe(gulpif(
@@ -34,14 +33,6 @@ function copyAssets() {
       })], {
         verbose: true
       })))
-    .pipe(dest(path.join('dist', 'assets')))
-}
-
-function copyHtml() {
-  return src('src/index_dist.html')
-    .pipe(rename(file => {
-      file.basename = 'index'
-    }))
     .pipe(dest('dist'))
 }
 
@@ -79,4 +70,4 @@ function concat(bundle) {
   return js
 }
 
-exports.dist = series(clean, parallel(copyAssets, jsBundle, copyHtml))
+exports.dist = series(clean, parallel(copyAssets, jsBundle))
