@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 const {
   src,
   dest,
@@ -19,9 +20,7 @@ function clean(next) {
 }
 
 function copyAssets() {
-  return src(['src/**/*', '!src/js/**'], {
-      nodir: false
-    })
+  return src(['src/**/*', '!src/js/**'])
     .pipe(gulpif(
       file => {
         return path.extname(file.relative) === '.png'

@@ -2,8 +2,7 @@
   "env": {
     "browser": true,
     "es6": true,
-    "node": true,
-    "amd": false
+    "node": true
   },
   "extends": "eslint:recommended",
   "parserOptions": {
@@ -11,6 +10,9 @@
     "ecmaVersion": 8
   },
   "rules": {
+    "indent": ["error", 2, {
+      "SwitchCase": 1
+    }],
     "linebreak-style": 0,
     "quotes": [
       "error",
@@ -37,6 +39,6 @@
     "no-case-declarations": "off"
   },
   "globals": {
-    "app": true,
+    "app": true
   }
 }
