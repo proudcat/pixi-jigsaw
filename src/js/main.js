@@ -5,13 +5,13 @@ import * as PIXI from 'pixi.js'
 import {
   META,
   RESOURCES
-} from './config.js'
+} from './config'
 
-import Sound from './sound.js'
-import Viewport from './viewport.js'
-import Loading from './loading.js'
-import VideoAd from './ad.js'
-import Scene from './scene.js'
+import Sound from './sound'
+import Viewport from './viewport'
+import Loading from './loading'
+import VideoAd from './ad'
+import Scene from './scene'
 
 //定义游戏的层
 const layers = {
@@ -23,7 +23,23 @@ const layers = {
 /**
  * 启动游戏
  */
-function boot() {
+async function boot() {
+  init()
+
+  try {
+    await load()
+  } catch (error) {
+    //todo跳转错误页面
+    return
+  }
+
+  create()
+}
+
+/**
+ * 初始化
+ */
+function init() {
 
   document.title = META.name
 
@@ -47,8 +63,6 @@ function boot() {
     layer.x = META.width / 2
     layer.y = META.height / 2
   }
-
-  load()
 }
 
 /**
@@ -57,29 +71,34 @@ function boot() {
  */
 function load(baseUrl) {
 
-  let loading = new Loading()
-  layers.ui.addChild(loading)
+  let promise = new Promise((resolve, reject) => {
 
-  let loader = new PIXI.Loader(baseUrl)
-  loader.defaultQueryString = `v=${META.version}`
+    let loading = new Loading()
+    layers.ui.addChild(loading)
 
-  RESOURCES.forEach(res => loader.add(res))
+    let loader = new PIXI.Loader(baseUrl)
+    loader.defaultQueryString = `v=${META.version}`
 
-  loader
-    .on('progress', (loader, res) => {
-      console.log(`loading: ${parseInt(loader.progress)}, ${res.url}`)
-      loading.progress = loader.progress
-    })
-    .on('error', (err, ctx, res) => {
-      console.warn(`load res failed:${res.url}`)
-      loader.reset()
-    })
-    .load((loader, res) => {
-      console.log('load res completed')
-      loading.destroy()
-      app.res = res
-      create()
-    })
+    RESOURCES.forEach(res => loader.add(res))
+
+    loader
+      .on('progress', (loader, res) => {
+        console.log(`loading: ${parseInt(loader.progress)}, ${res.url}`)
+        loading.progress = loader.progress
+      })
+      .on('error', (err, ctx, res) => {
+        console.error(`load res failed:${res.url}`)
+        loader.reset()
+        reject()
+      })
+      .load((loader, res) => {
+        console.log('load res completed')
+        loading.destroy()
+        app.res = res
+        resolve()
+      })
+  })
+  return promise
 }
 
 /**
@@ -87,16 +106,15 @@ function load(baseUrl) {
  */
 function create() {
 
-  let scene = new Scene(3)
+  let scene = new Scene(4)
   layers.scene.addChild(scene)
 
   //创建广告
-  let ad = new VideoAd()
-  layers.ui.addChild(ad)
-  ad.events.on('over', () => {
-    scene.start()
-  })
+  // let ad = new VideoAd()
+  // layers.ui.addChild(ad)
+  // ad.events.on('over', () => {
+  scene.start()
+  // })
 }
 
 boot()
-console.log('main')

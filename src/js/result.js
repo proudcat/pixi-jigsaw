@@ -1,12 +1,12 @@
-/**
- * 游戏结果页面
- */
 import * as PIXI from 'pixi.js'
 
 import {
   META
-} from './config.js'
+} from './config'
 
+/**
+ * 游戏结果页面
+ */
 export default class Result extends PIXI.Container {
   constructor() {
     super()

@@ -11,9 +11,6 @@ export const META = {
   height: 1280
 }
 
-//游戏难度
-export const LEVEL = 3
-
 //游戏资源列表
 export const RESOURCES = [{
   name: 'main',

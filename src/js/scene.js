@@ -3,8 +3,8 @@
  */
 import * as PIXI from 'pixi.js'
 
-import Jigsaw from './jigsaw.js'
-import Result from './result.js'
+import Jigsaw from './jigsaw'
+import Result from './result'
 
 const STYLE_WHITE = new PIXI.TextStyle({
   fontFamily: 'Arial',
@@ -20,6 +20,11 @@ const TOTAL_TIME = 30 //单位 秒
 let _countdown = TOTAL_TIME
 
 export default class Scene extends PIXI.Container {
+
+  /**
+   * 
+   * @param {Number} level  游戏难度 3代表3*3
+   */
   constructor(level) {
     super()
 

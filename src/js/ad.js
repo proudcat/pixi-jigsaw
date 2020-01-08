@@ -3,11 +3,11 @@
  */
 
 
-import Loading from './loading.js'
+import * as PIXI from 'pixi.js'
+import Loading from './loading'
 import {
   META
-} from './config.js'
-import * as PIXI from 'pixi.js'
+} from './config'
 
 export default class VideoAd extends PIXI.Container {
 

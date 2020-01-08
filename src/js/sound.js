@@ -1,9 +1,8 @@
+import sound from 'pixi-sound'
+
 /**
  * 音频模块
  */
-// import * as PIXI from 'pixi.js'
-import sound from 'pixi-sound'
-
 export default class Sound {
   constructor() {
 
@@ -52,5 +51,4 @@ export default class Sound {
   toggleMuteAll() {
     sound.toggleMuteAll()
   }
-
 }

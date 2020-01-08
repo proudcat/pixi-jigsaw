@@ -1,13 +1,8 @@
-/**
- * loading界面
- */
-
-
+import * as PIXI from 'pixi.js'
 import {
   META
-} from './config.js'
+} from './config'
 
-import * as PIXI from 'pixi.js'
 
 // function randomColor() {
 //   let letters = '0123456789ABCDEF'
@@ -18,6 +13,9 @@ import * as PIXI from 'pixi.js'
 //   return parseInt(color)
 // }
 
+/**
+ * loading界面
+ */
 export default class Loading extends PIXI.Container {
 
   /**
