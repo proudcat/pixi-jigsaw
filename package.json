@@ -5,8 +5,8 @@
   "private": true,
   "scripts": {
     "start": "webpack-dev-server --mode development",
-    "debug": "node_modules/.bin/gulp dist --mode=none",
-    "dist": "node_modules/.bin/gulp dist --mode=production"
+    "debug": "gulp dist --mode=none",
+    "dist": "gulp dist --mode=production"
   },
   "devDependencies": {
     "@babel/core": "^7.7.7",
