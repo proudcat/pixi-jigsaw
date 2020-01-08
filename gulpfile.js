@@ -64,12 +64,17 @@ function jsBundle(next) {
     module: {
       rules: [{
         test: /\.js$/,
-        exclude: /lib/,
+        exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-env'],
-            plugins: []
+            presets: [
+              ['@babel/preset-env', {
+                'corejs': '3',
+                'useBuiltIns': 'usage'
+              }]
+            ],
+            plugins: ['@babel/plugin-transform-runtime']
           }
         }
       }]
