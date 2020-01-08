@@ -14,6 +14,7 @@ const gulpif = require('gulp-if')
 const imagemin = require('gulp-imagemin')
 const webpack = require('webpack')
 const MemoryFS = require('memory-fs')
+const options = require('./webpack.config')
 
 function clean(next) {
   del.sync('dist')
@@ -36,13 +37,6 @@ function copyAssets() {
     .pipe(dest(path.join('dist', 'assets')))
 }
 
-// function copyLib() {
-//   return src(['src/lib/vendor.js', 'src/lib/goooku.js'], {
-//       nodir: false
-//     })
-//     .pipe(dest('dist'))
-// }
-
 function copyHtml() {
   return src('src/index_dist.html')
     .pipe(rename(file => {
@@ -53,33 +47,7 @@ function copyHtml() {
 
 function jsBundle(next) {
 
-  const options = {
-    entry: './src/js/main.js',
-    mode: argv.mode,
-    output: {
-      path: path.resolve(__dirname, 'dist'),
-      filename: 'game.min.js',
-    },
-    target: 'web',
-    module: {
-      rules: [{
-        test: /\.js$/,
-        exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: [
-              ['@babel/preset-env', {
-                'corejs': '3',
-                'useBuiltIns': 'usage'
-              }]
-            ],
-            plugins: ['@babel/plugin-transform-runtime']
-          }
-        }
-      }]
-    }
-  }
+  options.mode = argv.mode
 
   const compiler = webpack(options)
 
@@ -99,7 +67,8 @@ function jsBundle(next) {
 }
 
 function concat(bundle) {
-  let libs = ['src/lib/pixi.js', 'src/lib/pixi-sound.js']
+  return bundle
+  let libs = ['src/lib/pixi-sound.js']
   let js = ''
   libs.forEach(lib => {
     js += fs.readFileSync(lib, 'utf8')

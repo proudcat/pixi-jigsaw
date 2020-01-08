@@ -37,8 +37,6 @@
     "no-case-declarations": "off"
   },
   "globals": {
-    "PIXI": true,
     "app": true,
-    "tweenjs": true
   }
 }

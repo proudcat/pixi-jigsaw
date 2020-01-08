@@ -1,6 +1,7 @@
 /**
  * 游戏结果页面
  */
+import * as PIXI from 'pixi.js'
 
 import {
   META

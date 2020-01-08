@@ -7,6 +7,8 @@ import {
   META
 } from './config.js'
 
+import * as PIXI from 'pixi.js'
+
 // function randomColor() {
 //   let letters = '0123456789ABCDEF'
 //   let color = '0x'

@@ -1,6 +1,8 @@
 /**
  * 音频模块
  */
+// import * as PIXI from 'pixi.js'
+import sound from 'pixi-sound'
 
 export default class Sound {
   constructor() {
@@ -14,7 +16,7 @@ export default class Sound {
    * @param {Number} volume [required] : 音量 数值范围  0≤volume≤1
    */
   setVolume(volume) {
-    PIXI.sound.volumeAll = Math.max(0,
+    sound.volumeAll = Math.max(0,
       Math.min(1, parseFloat(volume))
     )
   }
@@ -48,7 +50,7 @@ export default class Sound {
    * 静音、取消静音
    */
   toggleMuteAll() {
-    PIXI.sound.toggleMuteAll()
+    sound.toggleMuteAll()
   }
 
 }

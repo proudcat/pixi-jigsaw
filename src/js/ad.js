@@ -7,6 +7,7 @@ import Loading from './loading.js'
 import {
   META
 } from './config.js'
+import * as PIXI from 'pixi.js'
 
 export default class VideoAd extends PIXI.Container {
 

@@ -1,9 +1,10 @@
 {
   "name": "jigsaw",
+  "main": "src/js/main.js",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "webpack-dev-server --mode development --content-base ./src --port 8080",
+    "start": "webpack-dev-server --mode development",
     "debug": "node_modules/.bin/gulp dist --mode=none",
     "dist": "node_modules/.bin/gulp dist --mode=production"
   },
@@ -25,6 +26,8 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.7.7",
-    "core-js": "^3.6.2"
+    "core-js": "^3.6.2",
+    "pixi-sound": "^3.0.4",
+    "pixi.js": "^5.2.0"
   }
 }

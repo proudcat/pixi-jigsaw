@@ -11,6 +11,7 @@
  * 
  * delay时间内，无论对callback调用多少次，最终只会调用一次callback, 用于防止函数调用过快。
  */
+
 export function throttle(delay, noTrailing, callback, debounceMode) {
 
   let timeoutID

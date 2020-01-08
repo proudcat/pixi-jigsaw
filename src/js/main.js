@@ -1,7 +1,7 @@
 /**
  * 游戏入口文件
  */
-
+import * as PIXI from 'pixi.js'
 import {
   META,
   RESOURCES
@@ -99,3 +99,4 @@ function create() {
 }
 
 boot()
+console.log('main')

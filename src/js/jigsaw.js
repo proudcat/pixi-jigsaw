@@ -1,3 +1,6 @@
+import * as PIXI from 'pixi.js'
+
+
 //切片之间显示的间隙
 const GAP_SIZE = 2
 

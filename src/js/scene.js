@@ -1,6 +1,7 @@
 /**
  * 游戏入口文件
  */
+import * as PIXI from 'pixi.js'
 
 import Jigsaw from './jigsaw.js'
 import Result from './result.js'
