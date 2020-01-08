@@ -1,6 +1,7 @@
 import {
 	throttle
-} from './util.js'
+} from 'throttle-debounce'
+
 import {
 	META
 } from './config.js'

@@ -3,7 +3,7 @@
     "browser": true,
     "es6": true,
     "node": true,
-    "amd": true
+    "amd": false
   },
   "extends": "eslint:recommended",
   "parserOptions": {
