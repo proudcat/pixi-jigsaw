@@ -36,17 +36,17 @@ export default class Piece extends PIXI.Sprite {
 
     //监听拖拽事件
     this
-      .on('pointerdown', this.onDragStart)
-      .on('pointermove', this.onDragMove)
-      .on('pointerup', this.onDragEnd)
-      .on('pointerupoutside', this.onDragEnd)
+      .on('pointerdown', this._onDragStart)
+      .on('pointermove', this._onDragMove)
+      .on('pointerup', this._onDragEnd)
+      .on('pointerupoutside', this._onDragEnd)
   }
 
   /**
    * 拖拽开始
    * @param {*} event 
    */
-  onDragStart(event) {
+  _onDragStart(event) {
     this.dragging = true
     this.data = event.data
     this.alpha = 0.5
@@ -68,7 +68,7 @@ export default class Piece extends PIXI.Sprite {
   /**
    * 拖拽中
    */
-  onDragMove() {
+  _onDragMove() {
     if (this.dragging) {
       const pos = this.data.getLocalPosition(this.parent)
       this.x = pos.x - this.offset_x
@@ -80,7 +80,7 @@ export default class Piece extends PIXI.Sprite {
   /**
    * 松开
    */
-  onDragEnd() {
+  _onDragEnd() {
     if (this.dragging) {
       this.dragging = false
       this.alpha = 1

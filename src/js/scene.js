@@ -1,6 +1,3 @@
-/**
- * 游戏入口文件
- */
 import * as PIXI from 'pixi.js'
 
 import Jigsaw from './jigsaw'
@@ -21,11 +18,7 @@ let _countdown = TOTAL_TIME
 
 export default class Scene extends PIXI.Container {
 
-  /**
-   * 
-   * @param {Number} level  游戏难度 3代表3*3
-   */
-  constructor(level) {
+  constructor() {
     super()
 
     //背景
@@ -49,7 +42,7 @@ export default class Scene extends PIXI.Container {
     this.addChild(this.$time)
 
     //创建拼图模块
-    this.jigsaw = new Jigsaw(level, app.res.main.textures.puzzle)
+    this.jigsaw = new Jigsaw(3, app.res.main.textures.puzzle)
     this.addChild(this.jigsaw)
   }
 

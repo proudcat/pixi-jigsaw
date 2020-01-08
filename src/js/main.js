@@ -106,7 +106,7 @@ function load(baseUrl) {
  */
 function create() {
 
-  let scene = new Scene(4)
+  let scene = new Scene()
   layers.scene.addChild(scene)
 
   //创建广告

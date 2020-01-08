@@ -41,13 +41,13 @@ export default class Jigsaw extends PIXI.Container {
     this.select.x = -4
     this.addChild(this.select)
 
-    this.createPieces()
+    this._createPieces()
   }
 
   /**
    * 洗牌，随机生成图片位置
    */
-  shuffle() {
+  _shuffle() {
 
     let index = -1
     let length = this.level * this.level
@@ -69,7 +69,7 @@ export default class Jigsaw extends PIXI.Container {
   /**
    * 创建切片
    */
-  createPieces() {
+  _createPieces() {
 
     this.piece_width = this.texture.orig.width / this.level
     this.piece_height = this.texture.orig.height / this.level
@@ -77,7 +77,7 @@ export default class Jigsaw extends PIXI.Container {
     let offset_x = this.texture.orig.width / 2
     let offset_y = this.texture.orig.height / 2
 
-    let shuffled_index = this.shuffle()
+    let shuffled_index = this._shuffle()
 
     for (let ii = 0; ii < shuffled_index.length; ii++) {
 
@@ -101,7 +101,7 @@ export default class Jigsaw extends PIXI.Container {
         })
         .on('dragmove', (picked) => {
           //检测是否可以和其他切片换位置
-          this.checkHover(picked)
+          this._checkHover(picked)
         })
         .on('dragend', (picked) => {
 
@@ -110,22 +110,15 @@ export default class Jigsaw extends PIXI.Container {
           this.pieces.addChild(picked)
 
           //检测是否有可交换的切片，有就换之，没有则滚回原位
-          let swapPiece = this.checkHover(picked)
-          if (swapPiece) {
+          let target = this._checkHover(picked)
+          if (target) {
             this.moveCount++
-            let pickedIndex = picked.currentIndex
-            picked.x = swapPiece.x
-            picked.y = swapPiece.y
-            picked.currentIndex = swapPiece.currentIndex
+            this._swap(picked, target)
 
-            swapPiece.x = picked.origin_x
-            swapPiece.y = picked.origin_y
-            swapPiece.currentIndex = pickedIndex
-
-            swapPiece.tint = 0xFFFFFF
+            target.tint = 0xFFFFFF
 
             //检测游戏是否成功
-            let success = this.checkSuccess()
+            let success = this._checkSuccess()
             if (success) {
               this.success = true
               console.log('success', this.moveCount)
@@ -139,11 +132,26 @@ export default class Jigsaw extends PIXI.Container {
       this.pieces.addChild(piece)
     }
   }
+  /**
+   * 交换两个切片
+   * @param {*} picked 当前鼠标拖拽的切片
+   * @param {*} target 要交换的切片
+   */
+  _swap(picked, target) {
+    let pickedIndex = picked.currentIndex
+    picked.x = target.x
+    picked.y = target.y
+    picked.currentIndex = target.currentIndex
+
+    target.x = picked.origin_x
+    target.y = picked.origin_y
+    target.currentIndex = pickedIndex
+  }
 
   /**
    * 检测游戏是否成功
    */
-  checkSuccess() {
+  _checkSuccess() {
 
     //所有块的当前位置和应该所在的位置一致则判断为成功
     let success = this.pieces.children.every(piece => {
@@ -157,7 +165,7 @@ export default class Jigsaw extends PIXI.Container {
    * 检测当前拖动的切片是否悬浮其他切片之上
    * @param {*} picked 
    */
-  checkHover(picked) {
+  _checkHover(picked) {
 
     let overlap = this.pieces.children.find(piece => {
       //判断当前拖动的切片的中心点是否在其他剩余图片范围(矩形边界)内
