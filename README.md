@@ -1,37 +1,34 @@
-# 搭建pixi游戏环境
->基于pixi.js v5版本，以一个简单的拼图游戏为例，演示了怎么搭建一个完整pixi游戏的开发环境，从开发到最终构建。
+# jigsaw puzzle
+>the project is based on pixi.js v5, demostrate how to build a game with webpack and utilize the latest ES feature.
 
-[体验地址](http://testactivity.goooku.com/ishop-demo/jigsaw/index.html) 
+[try the game](http://testactivity.goooku.com/ishop-demo/jigsaw/index.html) 
 
-### 截屏
+### screenshot
 * ![demo](./doc/demo.png)
 
-### 快速开始
-* 需要安装`nodejs`环境。
-* 在项目根目录运行`npm install`来安装项目依赖的库。
-* 运行`npm start`启动`http`服务器，然后浏览器访问`http://localhost:9090`就能看到项目效果。
+### setup
+* you should have `nodejs` installed.
+* run `npm install` command to install the dependencies.
+* run `npm start` command to start`http`server,then you can play the game by access the url `http://localhost:9090`.
 
-### 需要会的技术栈(你能学到什么)
-* 代码采用es7编写，正式打包时候会用`webpack`将所有`js`文件合并为一个文件`game.min.js`，并且转换为`es5`。
-* 使用`pixi.js`v5版本
-* 使用`texturepacker`工具制作图集。
-* 项目为nodejs项目。
-* 构建脚本使用`gulp`，脚本会调用`webpack`合并混淆`js`文件、压缩图片等等。
-* 需要少量的`css`和`html`知识，当浏览器视口大小发生变化时候，利用`css`对`canvas`进行屏幕自适应。
+### required knowledge
+* the code write in es8 and use pixi.js version 5.2.
+* use `webpack` to combine and uglify the `js`files into one file `game.min.js`, and convert it to `es5`.
+* use `texturepacker` tool to create atlas。
+* use `gulp` as compile tool, `gulp` will invoke `webpack` to compile `js`files and optimize the pictures.
+* you should have basic `css`and`html`knowledge, the `canvas` will auto fit the screen when viewport changed.
 
-### 目录及文件说明
-* `res`: 存放工程文件,例如`texturepacker`图集项目，字体等等。
-* `src`: 存放完整游戏项目，包括自己编写的`js`，第三方库，游戏资源(图片，音频等等)，游戏的`html`页面。
-* `dist`: 此目录为构建脚本动态生成，存放构建完成的项目文件，每次构建都会重新生成这个目录。
-* `.eslintrc.json`文件: 配置`es6`语法检查器语法检查规则
-* `.eslintignore`文件: 配置`es6`语法检查器忽略检查的目录和文件
-* `.gitattributes`文件: `git`提交时候`mac/unix`和`windows`换行符不一致，利用这个将所有系统换行符都统一。
-* `.gitignore`文件: 配置`git`仓库忽略的文件。
-* `.webpack.config.js`文件: webpack脚本。
-* `.gulpfile.js`文件:`gulp`构建脚本，用于发布项目时候时候构建和优化整个项目。
-* `package.json`文件: `node`项目的配置文件。
+### File Structure
+* `res`: `texturepacker` project and original font files etc.
+* `src`:all game resource and source code.
+* `dist`: distribute the final game project here.
+* `.eslintrc.json`: eslint configuration file.
+* `.eslintignore`: eslint ingore configuration.
+* `.webpack.config.js`: webpack configuraion file.
+* `.gulpfile.js`:`gulp` configuration file.
+* `package.json`: `node` configuration file.
 
 
-### 项目构建
-* 项目根目录运行`npm run debug`可构建`debug`版本的项目，最终所有文件会拷贝到`dist`目录下，会合并所有的`js`文件，但并未混淆用于排错。
-* 项目根目录运行`npm run dist`可构建`release`版本的项目，最终所有文件会拷贝到`dist`目录下，会合并所有的`js`文件并混淆，优化图片资源。
+### distribute
+* run `npm run debug` command to build the project with `debug` version, all the files will copy into `dist` directory and  wont uglify the js files.
+* run`npm run dist`command to `release` the project,all the files will copy into `dist` directory, all js files will combined and uglified,all pictures will be optimized.
