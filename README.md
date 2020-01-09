@@ -1,12 +1,15 @@
 # 搭建pixi游戏环境
->此项目基于pixi.js v5版本，以一个简单的拼图游戏为例，演示了怎么搭建一个完整pixi游戏的开发环境，从开发到最终构建。
+>基于pixi.js v5版本，以一个简单的拼图游戏为例，演示了怎么搭建一个完整pixi游戏的开发环境，从开发到最终构建。
+
+[体验地址](http://testactivity.goooku.com/ishop-demo/jigsaw/index.html) 
 
 ### 截屏
+* ![demo](./doc/demo.png)
 
-![demo](./doc/demo.png)
-
-### 开发环境
-* `nodejs`
+### 快速开始
+* 需要安装`nodejs`环境。
+* 在项目根目录运行`npm install`来安装项目依赖的库。
+* 运行`npm start`启动`http`服务器，然后浏览器访问`http://localhost:9090`就能看到项目效果。
 
 ### 需要会的技术栈(你能学到什么)
 * 代码采用es7编写，正式打包时候会用`webpack`将所有`js`文件合并为一个文件`game.min.js`，并且转换为`es5`。
@@ -14,7 +17,7 @@
 * 使用`texturepacker`工具制作图集。
 * 项目为nodejs项目。
 * 构建脚本使用`gulp`，脚本会调用`webpack`合并混淆`js`文件、压缩图片等等。
-* 需要少量的`css`和`html`知识，当浏览器视口大小发生变化时候，利用`css`对`canvas`进行自适应。
+* 需要少量的`css`和`html`知识，当浏览器视口大小发生变化时候，利用`css`对`canvas`进行屏幕自适应。
 
 ### 目录及文件说明
 * `res`: 存放工程文件,例如`texturepacker`图集项目，字体等等。
@@ -28,9 +31,6 @@
 * `.gulpfile.js`文件:`gulp`构建脚本，用于发布项目时候时候构建和优化整个项目。
 * `package.json`文件: `node`项目的配置文件。
 
-### 使用项目
-* 首先需要在项目根目录运行`npm install`来安装项目依赖的库。
-* 运行`npm start`启动`http`服务器，然后浏览器访问`http://localhost:9090`就能看到项目效果。
 
 ### 项目构建
 * 项目根目录运行`npm run debug`可构建`debug`版本的项目，最终所有文件会拷贝到`dist`目录下，会合并所有的`js`文件，但并未混淆用于排错。
