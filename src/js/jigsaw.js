@@ -2,40 +2,39 @@ import * as PIXI from 'pixi.js'
 import Piece from './piece'
 
 
-//切片之间显示的间隙
+//gap between the piece
 const GAP_SIZE = 2
 
 /**
- * 拼图类
- * 负责根据level切碎图片，计算每个切片的位置,拖拽时候是否需要交换图片位置等等。
- * 
+ * cut the picture into level * level pieces.
+ * caculate the position of the piece,drag the piece.
+ * check the game is ended
  */
 export default class Jigsaw extends PIXI.Container {
   constructor(level, texture) {
     super()
 
-    //难度2的话就是将图片切成2*2块 3的话就是3*3
+    //cut picture into level * level pieces
     this.level = level
     this.texture = texture
 
-    //移动步数统计
+    //how many step have you moved
     this.moveCount = 0
     // this.scale.set(1.4)
 
-    //背景层
     // this.back = new PIXI.Container()
     // let bg = new PIXI.Sprite(app.res.bg.texture)
     // bg.anchor.set(0.5)
     // this.back.addChild(bg)
     // this.addChild(this.back)
 
-    //切片层
+    //layer of the pieces
     this.pieces = new PIXI.Container()
     this.pieces.y = 208
     this.pieces.x = -4
     this.addChild(this.pieces)
 
-    //前景层，选中的图片要悬浮于所有其他切片之上
+    //front layer, selected piece will lie on top of other pieces
     this.select = new PIXI.Container()
     this.select.y = 208
     this.select.x = -4
@@ -45,7 +44,7 @@ export default class Jigsaw extends PIXI.Container {
   }
 
   /**
-   * 洗牌，随机生成图片位置
+   * shuffle, random place the pieces
    */
   _shuffle() {
 
@@ -67,7 +66,7 @@ export default class Jigsaw extends PIXI.Container {
   }
 
   /**
-   * 创建切片
+   * create pieces
    */
   _createPieces() {
 
@@ -81,7 +80,7 @@ export default class Jigsaw extends PIXI.Container {
 
     for (let ii = 0; ii < shuffled_index.length; ii++) {
 
-      //随机从大图中选一块当做切片
+      //pick a piece from the texture
       let row = parseInt(shuffled_index[ii] / this.level)
       let col = shuffled_index[ii] % this.level
       let frame = new PIXI.Rectangle(col * this.piece_width, row * this.piece_height, this.piece_width, this.piece_height)
@@ -89,27 +88,27 @@ export default class Jigsaw extends PIXI.Container {
       let current_row = parseInt(ii / this.level)
       let current_col = ii % this.level
 
-      //切片的显示位置
+      //position of the piece
       piece.x = current_col * this.piece_width - offset_x + GAP_SIZE * current_col
       piece.y = current_row * this.piece_height - offset_y + GAP_SIZE * current_row
 
       piece.events
         .on('dragstart', (picked) => {
-          //选中切片的时候 将切片置于最顶层，拖拽时候会显示于其他切片的顶层。
+          //put the selected（drag and move） piece on top of the others pieces.
           this.pieces.removeChild(picked)
           this.select.addChild(picked)
         })
         .on('dragmove', (picked) => {
-          //检测是否可以和其他切片换位置
+          //check if hover on the other piece
           this._checkHover(picked)
         })
         .on('dragend', (picked) => {
 
-          //还原切片层级
+          //restore the piece layer
           this.select.removeChild(picked)
           this.pieces.addChild(picked)
 
-          //检测是否有可交换的切片，有就换之，没有则滚回原位
+          //check if can swap the piece
           let target = this._checkHover(picked)
           if (target) {
             this.moveCount++
@@ -117,7 +116,7 @@ export default class Jigsaw extends PIXI.Container {
 
             target.tint = 0xFFFFFF
 
-            //检测游戏是否成功
+            //check is win
             let success = this._checkSuccess()
             if (success) {
               this.success = true
@@ -133,9 +132,9 @@ export default class Jigsaw extends PIXI.Container {
     }
   }
   /**
-   * 交换两个切片
-   * @param {*} picked 当前鼠标拖拽的切片
-   * @param {*} target 要交换的切片
+   * swap two pieces
+   * @param {*} picked the picked one
+   * @param {*} target the one under the picked
    */
   _swap(picked, target) {
     let pickedIndex = picked.currentIndex
@@ -149,11 +148,11 @@ export default class Jigsaw extends PIXI.Container {
   }
 
   /**
-   * 检测游戏是否成功
+   * check is win the game
    */
   _checkSuccess() {
 
-    //所有块的当前位置和应该所在的位置一致则判断为成功
+    //if all pieces is in the right position
     let success = this.pieces.children.every(piece => {
       return piece.currentIndex == piece.targetIndex
     })
@@ -162,13 +161,13 @@ export default class Jigsaw extends PIXI.Container {
   }
 
   /**
-   * 检测当前拖动的切片是否悬浮其他切片之上
+   * is the picked piece hover on the other piece
    * @param {*} picked 
    */
   _checkHover(picked) {
 
     let overlap = this.pieces.children.find(piece => {
-      //判断当前拖动的切片的中心点是否在其他剩余图片范围(矩形边界)内
+      //the center position of the piece is in the other pieces boundry
       let rect = new PIXI.Rectangle(piece.x, piece.y, piece.width, piece.height)
       return rect.contains(picked.center.x, picked.center.y)
     })
@@ -177,7 +176,7 @@ export default class Jigsaw extends PIXI.Container {
       piece.tint = 0xFFFFFF
     })
 
-    //如果当前拖拽的切片位于其他切片之上则改变下底下切片的tint值
+    //change tint color when picked piece is on me
     if (overlap) {
       overlap.tint = 0x00ffff
     }
@@ -185,9 +184,6 @@ export default class Jigsaw extends PIXI.Container {
     return overlap
   }
 
-  /**
-   * 创建背景层
-   */
   // createBack() {
   //   const graphics = new PIXI.Graphics()
   //   this.pieces.children.forEach(piece => {

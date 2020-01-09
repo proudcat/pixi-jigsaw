@@ -5,7 +5,7 @@ import {
 } from './config'
 
 /**
- * 游戏结果页面
+ * game result page
  */
 export default class Result extends PIXI.Container {
   constructor() {
@@ -26,7 +26,8 @@ export default class Result extends PIXI.Container {
 
     this.$win.addChild(win_icon)
 
-    let win_text = new PIXI.Text('获得钻技UU锅一个', new PIXI.TextStyle({
+    //获得钻技UU锅一个
+    let win_text = new PIXI.Text('you win a pan', new PIXI.TextStyle({
       fontFamily: 'Arial',
       fontSize: 40,
       fontWeight: 'bold',
@@ -59,7 +60,8 @@ export default class Result extends PIXI.Container {
     })
     this.$fail.addChild(fail_icon)
 
-    let fail_text = new PIXI.Text('获得钻技UU锅优惠券一张', new PIXI.TextStyle({
+    //获得钻技UU锅优惠券一张
+    let fail_text = new PIXI.Text('you got a coupon', new PIXI.TextStyle({
       fontFamily: 'Arial',
       fontSize: 40,
       fontWeight: 'bold',
@@ -72,12 +74,19 @@ export default class Result extends PIXI.Container {
     this.addChild(this.$win)
   }
 
+  /**
+   * win the game
+   */
   win() {
     this.visible = true
     this.$win.visible = true
     this.$fail.visible = false
   }
 
+
+  /**
+   * fail the game
+   */
   fail() {
     this.visible = true
     this.$win.visible = false

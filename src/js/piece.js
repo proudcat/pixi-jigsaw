@@ -1,17 +1,19 @@
 import * as PIXI from 'pixi.js'
 
 /**
- * 图片切片类
+ * Piece class
  */
 export default class Piece extends PIXI.Sprite {
 
   /**
    * 
-   * @param {*} texture 切片显示的图片
-   * @param {*} currentIndex 这个切片当前位置索引
-   * @param {*} targetIndex 这个切片的正确位置索引
+   * @param {*} texture picture of the piece
+   * @param {*} currentIndex current index of the piece
+   * @param {*} targetIndex the right index of the piece
+   *            when targetIndex == currentIndex means the piece is in the right positon,
+   *            if all pieces in the right position you win the game.
    * 
-   * 切片的索引（3*3为例）
+   * index of piece（3*3 etc.）
    * 0  1  2
    * 3  4  5
    * 6  7  8
@@ -19,22 +21,15 @@ export default class Piece extends PIXI.Sprite {
   constructor(texture, currentIndex, targetIndex) {
     super(texture)
 
-    //该切片当前位置的索引
     this.currentIndex = currentIndex
-
-    //该切片目标(正确)位置的索引
     this.targetIndex = targetIndex
 
-    //游戏是否成功
-    this.success = false
-
-    //让sprite可被点击
     this.interactive = true
 
-    //事件发射器,当发生拖拽事件通过这个将事件广播出去
+    //event emitter
     this.events = new PIXI.utils.EventEmitter()
 
-    //监听拖拽事件
+    //listen on the drag event
     this
       .on('pointerdown', this._onDragStart)
       .on('pointermove', this._onDragMove)
@@ -43,7 +38,7 @@ export default class Piece extends PIXI.Sprite {
   }
 
   /**
-   * 拖拽开始
+   * start drag
    * @param {*} event 
    */
   _onDragStart(event) {
@@ -51,14 +46,14 @@ export default class Piece extends PIXI.Sprite {
     this.data = event.data
     this.alpha = 0.5
 
-    //鼠标点击的位置(相对于父节点的坐标)
+    //position of the mouse pointer(relative to the parent)
     let pointer_pos = this.data.getLocalPosition(this.parent)
 
-    //鼠标点击位置的坐标和点击目标自身坐标的偏移量
+    //the offset between mouse pointer position and piece positon
     this.offset_x = pointer_pos.x - this.x
     this.offset_y = pointer_pos.y - this.y
 
-    //记录原始坐标位置(移动之前坐标的位置)
+    //the piece original position
     this.origin_x = this.x
     this.origin_y = this.y
 
@@ -66,7 +61,7 @@ export default class Piece extends PIXI.Sprite {
   }
 
   /**
-   * 拖拽中
+   * dragging
    */
   _onDragMove() {
     if (this.dragging) {
@@ -78,7 +73,7 @@ export default class Piece extends PIXI.Sprite {
   }
 
   /**
-   * 松开
+   * drop
    */
   _onDragEnd() {
     if (this.dragging) {
@@ -90,7 +85,7 @@ export default class Piece extends PIXI.Sprite {
   }
 
   /**
-   * 切片中心点坐标
+   * center postion of the piece
    */
   get center() {
     return {

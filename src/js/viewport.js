@@ -7,14 +7,15 @@ import {
 } from './config.js'
 
 /**
- * 视口，封装了一下canvas，用于屏幕自适应
- * 让canvas按照比例 在container范围内自适应
+ * allowed canvas autofit when viewport(browser size) changed.
+ * constrained by the father container.
  */
 export default class Viewport {
   /**
    *
-   * @param {*} options.autofit   是否自动适配
-   * @param {*} options.viewRect   视口显示区域
+   * @param {*} options.autofit   is auto fit when viewport changed
+   * @param {*} options.viewRect {x,y,width,height} position and size to constrain the canvas
+   *    if set,the canvas will constrained inside the rectangle
    */
   constructor(options) {
 
@@ -39,10 +40,7 @@ export default class Viewport {
   }
 
   /**
-   * 调整视口大小和位置
-   * @param viewRect {Object} [option] {x:0,y:0,width:100,height:100}
-   *    如果设置了值 则canvas显示在这个区域内
-   *    如果没设置值 则居中显示，并且宽或者高肯定会铺满屏，但是会保证宽高比，防止出现拉伸。
+   * resize the canvas size and position to the center of the screen.
    */
   resize() {
 
@@ -65,6 +63,7 @@ export default class Viewport {
     let canvas_h
 
     //这里看宽满屏就按照宽适配，高满屏则按照高适配
+    //autofit by width or height
     if (windowRatio < defaultRatio) {
       canvas_w = viewRect.width
       canvas_h = viewRect.width / defaultRatio
@@ -73,11 +72,10 @@ export default class Viewport {
       canvas_w = viewRect.height * defaultRatio
     }
 
-    //居中对齐
+    //center the canvas to the father
     this.$canvas.style.left = `${(viewRect.width - canvas_w) / 2}px`
     this.$canvas.style.top = `${(viewRect.height - canvas_h) / 2}px`
 
-    //按照计算比例计算宽高
     this.$canvas.style.width = canvas_w + 'px'
     this.$canvas.style.height = canvas_h + 'px'
 

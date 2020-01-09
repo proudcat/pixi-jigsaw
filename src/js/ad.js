@@ -5,7 +5,7 @@ import {
 } from './config'
 
 /**
- * 视频广告模块
+ * video advertisement module
  */
 export default class VideoAd extends PIXI.Container {
 
@@ -40,7 +40,7 @@ export default class VideoAd extends PIXI.Container {
     })
   }
 
-  //正常通过pixi.js的loader加载视频，通过这个函数播放就可以，但是在微信浏览器pixi的loader无法加载video
+  // normally we can load the video by pixi loader and play the video like this.
   // play() {
   //   this.visible = false
   //   let video = app.res.ad.data
@@ -56,7 +56,7 @@ export default class VideoAd extends PIXI.Container {
   //   video.play()
   // }
 
-  //解决微信浏览器下视频无法通过pixi的loader直接加载的问题
+  //wechat browser can not load video by pixi.js loader,so we manually load the video
   play() {
     this.startButton.visible = false
     this.bg.visible = false

@@ -14,14 +14,13 @@ import {
 // }
 
 /**
- * loading界面
+ * loading ui
  */
 export default class Loading extends PIXI.Container {
 
   /**
-   * 构造函数
    * @param {object} options   
-   * @param {boolean} options.progress 是否显示进度
+   * @param {boolean} options.progress is to show the progress text
    */
   constructor(options) {
     super()
@@ -30,19 +29,19 @@ export default class Loading extends PIXI.Container {
       progress: true
     }, options)
 
-    //每块的弧的弧度
+    //angle of the arc
     let arcAngle = Math.PI * 0.2
 
-    //弧间距的弧度
+    //gap angle
     let gapAngle = Math.PI * 0.05
 
-    //弧起始坐标偏移量，正常graphics是从3点位置为起始0弧度
+    //offset angle, graphics start  from 3 o'clock
     let offsetAngle = -arcAngle * 0.5
 
-    //弧的半径
+    //radius of the angle
     let radius = 80
 
-    //背景遮罩
+    //background mask
     let bg = new PIXI.Graphics()
     bg.moveTo(0, 0)
     bg.beginFill(0x000000, 0.8)
@@ -50,7 +49,7 @@ export default class Loading extends PIXI.Container {
     bg.interactive = true
     this.addChild(bg)
 
-    //创建弧
+    //create 8 arcs
     for (let i = 0; i < 8; i++) {
       let arc = new PIXI.Graphics()
       arc.lineStyle(16, 0xffffff, 1, 0.5)
@@ -60,7 +59,7 @@ export default class Loading extends PIXI.Container {
       this.addChild(arc)
     }
 
-    //创建动画弧，一直旋转
+    //create ratating arc
     let mask = new PIXI.Graphics()
     this.addChild(mask)
 
@@ -88,7 +87,7 @@ export default class Loading extends PIXI.Container {
   }
 
   /**
-   * 设置进度显示文字
+   * set progress text
    * @param {number} newValue
    */
   set progress(newValue) {

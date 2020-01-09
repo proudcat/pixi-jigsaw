@@ -1,17 +1,17 @@
 /**
- * 配置文件
- * 配置游戏所需的资源和游戏相关信息
+ * configuration file
+ * to config all the resouces and contant here
  */
 
-//游戏基本信息
+//basic game infomation
 export const META = {
-  name: '疯狂拼图',
+  name: 'jigsaw puzzle',
   version: '1.0.0',
   width: 796,
   height: 1280
 }
 
-//游戏资源列表
+//resouce list
 export const RESOURCES = [{
   name: 'main',
   url: 'assets/image/main.json'

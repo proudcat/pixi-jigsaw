@@ -10,23 +10,25 @@ const STYLE_WHITE = new PIXI.TextStyle({
   fill: '#ffffff',
 })
 
-//拼图倒计时
-const TOTAL_TIME = 30 //单位 秒
+//time limit
+const TOTAL_TIME = 30 //second
 
-//倒计时
+//time countdown
 let _countdown = TOTAL_TIME
 
+/**
+ * scene of the game
+ */
 export default class Scene extends PIXI.Container {
 
   constructor() {
     super()
 
-    //背景
     let bg = new PIXI.Sprite(app.res.bg.texture)
     bg.anchor.set(0.5)
     this.addChild(bg)
 
-    //创建参考图
+    //reference map
     let idol = new PIXI.Sprite(app.res.main.textures.puzzle)
     idol.y = -198
     idol.x = -165
@@ -34,20 +36,20 @@ export default class Scene extends PIXI.Container {
     idol.scale.set(0.37)
     this.addChild(idol)
 
-    //创建倒计时文字
+    //countdown text
     this.$time = new PIXI.Text(_countdown + '″', STYLE_WHITE)
     this.$time.anchor.set(0.5)
     this.$time.x = 170
     this.$time.y = -156
     this.addChild(this.$time)
 
-    //创建拼图模块
+    //jigsaw puzzle module
     this.jigsaw = new Jigsaw(3, app.res.main.textures.puzzle)
     this.addChild(this.jigsaw)
   }
 
   /**
-   * 开始游戏
+   * start the game
    */
   start() {
 

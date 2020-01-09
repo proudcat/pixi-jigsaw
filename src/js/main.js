@@ -1,5 +1,5 @@
 /**
- * 游戏入口文件
+ * entrance file
  */
 import * as PIXI from 'pixi.js'
 import {
@@ -14,7 +14,7 @@ import VideoAd from './ad'
 import Scene from './scene'
 import swal from 'sweetalert'
 
-//定义游戏的层
+//layers of the game
 const layers = {
   back: new PIXI.Container(),
   scene: new PIXI.Container(),
@@ -22,7 +22,7 @@ const layers = {
 }
 
 /**
- * 启动游戏
+ * boot the application
  */
 async function boot() {
   init()
@@ -30,7 +30,7 @@ async function boot() {
   try {
     await load()
   } catch (error) {
-    swal({ title: '资源加载失败', text: error, icon: 'error', button: '重新加载' })
+    swal({ title: 'load resource failed', text: error, icon: 'error', button: 'reload' })
       .then((value) => {
         if (value) {
           boot()
@@ -42,13 +42,12 @@ async function boot() {
 }
 
 /**
- * 初始化
+ * init the application
  */
 function init() {
 
   document.title = META.name
 
-  //创建视口
   const viewport = new Viewport()
 
   window.app = new PIXI.Application({
@@ -61,7 +60,7 @@ function init() {
   app.sound = new Sound()
   app.viewport = viewport
 
-  //层级加入到游戏场景中,并将所有的层坐标设置为屏幕中心点
+  //create layers and postioned at the center of the screen.
   for (const key in layers) {
     let layer = layers[key]
     app.stage.addChild(layer)
@@ -71,7 +70,7 @@ function init() {
 }
 
 /**
- * 加载所有的游戏资源
+ * load all resources
  * @param {*} baseUrl 
  */
 function load(baseUrl) {
@@ -107,14 +106,14 @@ function load(baseUrl) {
 }
 
 /**
- * 创建游戏场景
+ * create the game scene
  */
 function create() {
 
   let scene = new Scene()
   layers.scene.addChild(scene)
 
-  //创建广告
+  //play the ads then start the game
   // let ad = new VideoAd()
   // layers.ui.addChild(ad)
   // ad.events.on('over', () => {
