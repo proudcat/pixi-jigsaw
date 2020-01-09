@@ -27,6 +27,7 @@
     "core-js": "^3.6.2",
     "pixi-sound": "^3.0.4",
     "pixi.js": "^5.2.0",
+    "sweetalert": "^2.1.2",
     "throttle-debounce": "^2.1.0"
   }
 }

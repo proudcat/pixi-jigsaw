@@ -12,6 +12,7 @@ import Viewport from './viewport'
 import Loading from './loading'
 import VideoAd from './ad'
 import Scene from './scene'
+import swal from 'sweetalert'
 
 //定义游戏的层
 const layers = {
@@ -29,10 +30,14 @@ async function boot() {
   try {
     await load()
   } catch (error) {
-    //todo跳转错误页面
+    swal({ title: '资源加载失败', text: error, icon: 'error', button: '重新加载' })
+      .then((value) => {
+        if (value) {
+          boot()
+        }
+      })
     return
   }
-
   create()
 }
 
@@ -89,7 +94,7 @@ function load(baseUrl) {
       .on('error', (err, ctx, res) => {
         console.error(`load res failed:${res.url}`)
         loader.reset()
-        reject()
+        reject(res.url)
       })
       .load((loader, res) => {
         console.log('load res completed')

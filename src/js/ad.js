@@ -1,14 +1,12 @@
-/**
- * 视频广告模块
- */
-
-
 import * as PIXI from 'pixi.js'
 import Loading from './loading'
 import {
   META
 } from './config'
 
+/**
+ * 视频广告模块
+ */
 export default class VideoAd extends PIXI.Container {
 
   constructor() {
