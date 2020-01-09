@@ -3,8 +3,10 @@
 
 [try the game](http://testactivity.goooku.com/ishop-demo/jigsaw/index.html) 
 
+[中文文档](./doc/README_CN.md)
+
 ### screenshot
-* ![demo](./doc/demo.png)
+![demo](./doc/demo.png)
 
 ### setup
 * you should have `nodejs` installed.
