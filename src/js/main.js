@@ -8,9 +8,9 @@ import {
 } from './config'
 
 import Sound from './sound'
-import Viewport from './viewport'
+import Application from './app'
 import Loading from './loading'
-import VideoAd from './ad'
+// import VideoAd from './ad'
 import Scene from './scene'
 import swal from 'sweetalert'
 
@@ -30,7 +30,11 @@ async function boot() {
   try {
     await load()
   } catch (error) {
-    swal({ title: 'load resource failed', text: error, icon: 'error', button: 'reload' })
+    swal({
+      title: 'load resource failed',
+      text: error, icon: 'error',
+      button: 'reload'
+    })
       .then((value) => {
         if (value) {
           boot()
@@ -48,17 +52,14 @@ function init() {
 
   document.title = META.name
 
-  const viewport = new Viewport()
-
-  window.app = new PIXI.Application({
+  window.app = new Application({
     width: META.width,
     height: META.height,
-    view: viewport.$canvas,
+    view: document.querySelector('#scene'),
     transparent: true
   })
 
   app.sound = new Sound()
-  app.viewport = viewport
 
   //create layers and postioned at the center of the screen.
   for (const key in layers) {

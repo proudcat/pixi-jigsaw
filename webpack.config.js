@@ -10,7 +10,7 @@ module.exports = {
   target: 'web',
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
-    port: 9090,
+    port: 8080,
     host: '0.0.0.0',
     hot: true
   },

@@ -44,9 +44,9 @@ export default class VideoAd extends PIXI.Container {
   // play() {
   //   this.visible = false
   //   let video = app.res.ad.data
-  //   app.viewport.$container.appendChild(video)
+  //   app.$container.appendChild(video)
   //   video.className = 'autofit'
-  //   app.viewport.resize()
+  //   app.resize()
 
   //   video.onended = () => {
   //     this.events.emit('over')
@@ -73,8 +73,8 @@ export default class VideoAd extends PIXI.Container {
     video.onloadeddata = () => {
       loading.destroy()
       video.currentTime = 0
-      app.viewport.$container.appendChild(video)
-      app.viewport.resize()
+      app.$container.appendChild(video)
+      app.resize()
     }
 
     video.onended = () => {

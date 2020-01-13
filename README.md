@@ -11,7 +11,7 @@
 ### Setup
 * you should have `nodejs` installed.
 * run `npm install` command to install the dependencies.
-* run `npm start` command to start`http`server,then you can play the game by access the url `http://localhost:9090`.
+* run `npm start` command to start`http`server,then you can play the game by access the url `http://localhost:8080`.
 
 ### Required Knowledge
 * the code write in es8 and use pixi.js version 5.2.
