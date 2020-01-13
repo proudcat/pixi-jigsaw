@@ -100,13 +100,13 @@ export default class Application extends PIXI.Application {
 
     let loader = new PIXI.Loader(baseUrl)
     loader.defaultQueryString = `v=${config.meta.version}`
-    loader.add(app.i18n.file)
+    loader.add(this.i18n.file)
 
     config.resources.forEach(res => {
       if (res.i18n) {
         loader.add({
           name: res.name,
-          url: res.i18n[app.i18n.language]
+          url: res.i18n[this.i18n.language]
         })
       } else {
         loader.add(res)
@@ -124,8 +124,8 @@ export default class Application extends PIXI.Application {
       .load((loader, res) => {
         console.log('load completed!')
         app.res = res
-        app.i18n.add(res[app.i18n.file].data)
-        delete res[app.i18n.file]
+        this.i18n.add(res[this.i18n.file].data)
+        delete res[this.i18n.file]
       })
 
     return loader

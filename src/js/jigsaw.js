@@ -33,16 +33,16 @@ export default class Jigsaw extends Container {
     // this.addChild(this.back)
 
     //layer of the pieces
-    this.pieces = new Container()
-    this.pieces.y = 208
-    this.pieces.x = -4
-    this.addChild(this.pieces)
+    this.$pieces = new Container()
+    this.$pieces.y = 208
+    this.$pieces.x = -4
+    this.addChild(this.$pieces)
 
     //front layer, selected piece will lie on top of other pieces
-    this.select = new Container()
-    this.select.y = 208
-    this.select.x = -4
-    this.addChild(this.select)
+    this.$select = new Container()
+    this.$select.y = 208
+    this.$select.x = -4
+    this.addChild(this.$select)
 
     this._createPieces()
   }
@@ -99,8 +99,8 @@ export default class Jigsaw extends Container {
       piece.events
         .on('dragstart', (picked) => {
           //put the selected（drag and move） piece on top of the others pieces.
-          this.pieces.removeChild(picked)
-          this.select.addChild(picked)
+          this.$pieces.removeChild(picked)
+          this.$select.addChild(picked)
         })
         .on('dragmove', (picked) => {
           //check if hover on the other piece
@@ -109,8 +109,8 @@ export default class Jigsaw extends Container {
         .on('dragend', (picked) => {
 
           //restore the piece layer
-          this.select.removeChild(picked)
-          this.pieces.addChild(picked)
+          this.$select.removeChild(picked)
+          this.$pieces.addChild(picked)
 
           //check if can swap the piece
           let target = this._checkHover(picked)
@@ -132,7 +132,7 @@ export default class Jigsaw extends Container {
             picked.y = picked.origin_y
           }
         })
-      this.pieces.addChild(piece)
+      this.$pieces.addChild(piece)
     }
   }
   /**
@@ -157,9 +157,7 @@ export default class Jigsaw extends Container {
   _checkSuccess() {
 
     //if all pieces is in the right position
-    let success = this.pieces.children.every(piece => {
-      return piece.currentIndex == piece.targetIndex
-    })
+    let success = this.$pieces.children.every(piece => piece.currentIndex == piece.targetIndex)
 
     return success
   }
@@ -170,15 +168,13 @@ export default class Jigsaw extends Container {
    */
   _checkHover(picked) {
 
-    let overlap = this.pieces.children.find(piece => {
+    let overlap = this.$pieces.children.find(piece => {
       //the center position of the piece is in the other pieces boundry
       let rect = new Rectangle(piece.x, piece.y, piece.width, piece.height)
       return rect.contains(picked.center.x, picked.center.y)
     })
 
-    this.pieces.children.forEach(piece => {
-      piece.tint = 0xFFFFFF
-    })
+    this.$pieces.children.forEach(piece => piece.tint = 0xFFFFFF)
 
     //change tint color when picked piece is on me
     if (overlap) {
@@ -190,7 +186,7 @@ export default class Jigsaw extends Container {
 
   // createBack() {
   //   const graphics = new Graphics()
-  //   this.pieces.children.forEach(piece => {
+  //   this.$pieces.children.forEach(piece => {
   //     graphics.lineStyle(2, 0xFEEB77, 1)
   //     graphics.beginFill(0x650a5A)
   //     graphics.drawRect(piece.x, piece.y, piece.width, piece.height)

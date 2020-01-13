@@ -44,8 +44,8 @@ export default class Scene extends Container {
     this.addChild(this.$time)
 
     //jigsaw puzzle module
-    this.jigsaw = new Jigsaw(3, app.res.main.textures.puzzle)
-    this.addChild(this.jigsaw)
+    this.$jigsaw = new Jigsaw(3, app.res.main.textures.puzzle)
+    this.addChild(this.$jigsaw)
   }
 
   /**
@@ -58,7 +58,7 @@ export default class Scene extends Container {
 
     app.sound.play('sound_bg', true)
     let timer = setInterval(() => {
-      if (this.jigsaw.success) {
+      if (this.$jigsaw.success) {
         clearInterval(timer)
         app.sound.stop('sound_bg')
         app.sound.play('sound_win')
