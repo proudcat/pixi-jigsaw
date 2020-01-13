@@ -122,6 +122,4 @@ function create() {
   })
 }
 
-window.onload = () => {
-  boot()
-}
+window.onload = boot
