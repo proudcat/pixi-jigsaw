@@ -34,6 +34,3 @@
 ### Distribution
 * run `npm run debug` command to build the project with `debug` version, all the files will copy into `dist` directory and  wont uglify the js files.
 * run`npm run dist`command to `release` the project,all the files will copy into `dist` directory, all js files will combined and uglified,all pictures will be optimized.
-
-### TODO
-* `i18n`
