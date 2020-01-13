@@ -23,9 +23,6 @@ export default class Application extends PIXI.Application {
     super(options)
     this.viewRect = viewRect
 
-    //constrain the canvas to the boundry of the container 
-    this.$container = document.querySelector('#container')
-
     //optimize the resize invoke rate
     window.addEventListener('resize', throttle(300, () => {
       this.autoResize(this.viewRect)
@@ -52,38 +49,39 @@ export default class Application extends PIXI.Application {
       height: window.innerHeight
     }, this.viewRect)
 
-    this.$container.style.left = viewRect.x + 'px'
-    this.$container.style.top = viewRect.y + 'px'
-    this.$container.style.width = viewRect.width + 'px'
-    this.$container.style.height = viewRect.height + 'px'
-
     const defaultRatio = this.view.width / this.view.height
     const windowRatio = viewRect.width / viewRect.height
 
-    let canvas_w
-    let canvas_h
+    let width
+    let height
 
     //autofit by width or height
     if (windowRatio < defaultRatio) {
-      canvas_w = viewRect.width
-      canvas_h = viewRect.width / defaultRatio
+      width = viewRect.width
+      height = viewRect.width / defaultRatio
     } else {
-      canvas_h = viewRect.height
-      canvas_w = viewRect.height * defaultRatio
+      height = viewRect.height
+      width = viewRect.height * defaultRatio
     }
 
-    //center the canvas to the father
-    this.view.style.left = `${(viewRect.width - canvas_w) / 2}px`
-    this.view.style.top = `${(viewRect.height - canvas_h) / 2}px`
+    let x = viewRect.x + (viewRect.width - width) / 2
+    let y = viewRect.y + (viewRect.height - height) / 2
 
-    this.view.style.width = canvas_w + 'px'
-    this.view.style.height = canvas_h + 'px'
+    //center the canvas to the father
+    this.view.style.left = `${x}px`
+    this.view.style.top = `${y}px`
+    // this.view.style.left = viewRect.x + 'px'
+    // this.view.style.top = viewRect.y + 'px'
+
+    this.view.style.width = `${width}px`
+    this.view.style.height = `${height}px`
 
     let autofitItems = document.querySelectorAll('.autofit')
     autofitItems.forEach(item => {
-      item.style.width = canvas_w + 'px'
-      item.style.height = canvas_h + 'px'
+      item.style.left = `${x}px`
+      item.style.top = `${y}px`
+      item.style.width = `${width}px`
+      item.style.height = `${height}px`
     })
   }
-
 }

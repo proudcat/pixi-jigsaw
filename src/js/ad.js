@@ -73,8 +73,8 @@ export default class VideoAd extends PIXI.Container {
     video.onloadeddata = () => {
       loading.destroy()
       video.currentTime = 0
-      app.$container.appendChild(video)
-      app.resize()
+      app.view.parentElement.append(video)
+      app.autoResize()
     }
 
     video.onended = () => {

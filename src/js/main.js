@@ -10,7 +10,7 @@ import {
 import Sound from './sound'
 import Application from './app'
 import Loading from './loading'
-// import VideoAd from './ad'
+import VideoAd from './ad'
 import Scene from './scene'
 import swal from 'sweetalert'
 
@@ -57,7 +57,7 @@ function init() {
     height: META.height,
     view: document.querySelector('#scene'),
     transparent: true
-  })
+  }, { x: 100, y: 100, width: META.width / 3, height: META.height / 2 })
 
   app.sound = new Sound()
 
@@ -115,11 +115,11 @@ function create() {
   layers.scene.addChild(scene)
 
   //play the ads then start the game
-  // let ad = new VideoAd()
-  // layers.ui.addChild(ad)
-  // ad.events.on('over', () => {
-  scene.start()
-  // })
+  let ad = new VideoAd()
+  layers.ui.addChild(ad)
+  ad.events.on('over', () => {
+    scene.start()
+  })
 }
 
 window.onload = () => {
