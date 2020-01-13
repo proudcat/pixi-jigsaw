@@ -19,19 +19,16 @@ export const viewRect = null
 //resouce list
 export const resources = [
   //configuration for i18n images or sounds or atlas(.json) etc.
-  // {
-  //   name: 'result',
-  //   i18n: {
-  //     'en': 'assets/image/result.json',
-  //     'zh-cn': 'assets/image/result.json',
-  //   }
-  // },
+  {
+    name: 'bg',
+    i18n: {
+      'en': 'assets/image/bg_en.png',
+      'zh-cn': 'assets/image/bg_zh-cn.png',
+    }
+  },
   {
     name: 'main',
     url: 'assets/image/main.json'
-  }, {
-    name: 'bg',
-    url: 'assets/image/bg.png'
   }, {
     name: 'sound_bg',
     url: 'assets/audio/bg.mp3'
