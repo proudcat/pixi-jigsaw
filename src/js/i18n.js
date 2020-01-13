@@ -9,6 +9,7 @@ export default class I18N {
   /**
    * 
    * @param config: i18n configuration
+   * the key must be compatible with window.navigator.language
    * {
    *  'en': 'assets/i18n/en.json',
    *  'zh-cn': 'assets/i18n/zh-cn.json'

@@ -39,7 +39,6 @@ export default class Application extends PIXI.Application {
 
     this.sound = new Sound()
     this.i18n = new I18N(config.i18n)
-
   }
 
   /**
@@ -93,7 +92,6 @@ export default class Application extends PIXI.Application {
     })
   }
 
-
   /**
  * load all resources
  * @param {*} baseUrl 
@@ -101,14 +99,15 @@ export default class Application extends PIXI.Application {
   load(baseUrl) {
 
     let loader = new PIXI.Loader(baseUrl)
-    loader.defaultQueryString = `v=${config.META.version}`
+    loader.defaultQueryString = `v=${config.meta.version}`
     loader.add(app.i18n.file)
 
-    config.RESOURCES.forEach(res => {
+    config.resources.forEach(res => {
       if (res.i18n) {
         loader.add({ name: res.name, url: res.i18n[app.i18n.language] })
+      } else {
+        loader.add(res)
       }
-      loader.add(res)
     })
 
     loader

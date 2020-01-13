@@ -22,11 +22,11 @@ const layers = {
  */
 async function boot() {
 
-  document.title = config.META.name
+  document.title = config.meta.name
 
   window.app = new Application({
-    width: config.META.width,
-    height: config.META.height,
+    width: config.meta.width,
+    height: config.meta.height,
     view: document.querySelector('#scene'),
     transparent: true
   })
@@ -35,8 +35,8 @@ async function boot() {
   for (const key in layers) {
     let layer = layers[key]
     app.stage.addChild(layer)
-    layer.x = config.META.width / 2
-    layer.y = config.META.height / 2
+    layer.x = config.meta.width / 2
+    layer.y = config.meta.height / 2
   }
 
   try {
@@ -84,7 +84,6 @@ function create() {
   let scene = new Scene()
   layers.scene.addChild(scene)
 
-  //play the ads then start the game
   // let ad = new VideoAd()
   // layers.ui.addChild(ad)
   // ad.events.on('over', () => {

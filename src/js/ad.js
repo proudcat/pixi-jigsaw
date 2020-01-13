@@ -1,7 +1,7 @@
 import * as PIXI from 'pixi.js'
 import Loading from './loading'
 import {
-  META
+  meta
 } from './config'
 
 /**
@@ -16,7 +16,7 @@ export default class VideoAd extends PIXI.Container {
     this.bg = new PIXI.Graphics()
     this.bg.moveTo(0, 0)
     this.bg.beginFill(0x000000, 0.8)
-    this.bg.drawRect(-META.width / 2, -META.height / 2, META.width, META.height)
+    this.bg.drawRect(-meta.width / 2, -meta.height / 2, meta.width, meta.height)
     this.bg.interactive = true
     this.addChild(this.bg)
 

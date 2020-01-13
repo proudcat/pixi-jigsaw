@@ -4,13 +4,17 @@
  */
 
 //basic game infomation
-export const META = {
+export const meta = {
   name: 'jigsaw puzzle',
   version: '1.0.0',
   width: 796,
   height: 1280
 }
 
+/**
+ * i18n text files
+ * 
+ */
 export const i18n = {
   'en': 'assets/i18n/en.json',
   'zh-cn': 'assets/i18n/zh-cn.json'
@@ -19,7 +23,7 @@ export const i18n = {
 export const viewRect = null
 
 //resouce list
-export const RESOURCES = [
+export const resources = [
   // {
   //   name: 'result',
   //   i18n: {
