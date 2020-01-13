@@ -115,11 +115,11 @@ function create() {
   layers.scene.addChild(scene)
 
   //play the ads then start the game
-  let ad = new VideoAd()
-  layers.ui.addChild(ad)
-  ad.events.on('over', () => {
-    scene.start()
-  })
+  // let ad = new VideoAd()
+  // layers.ui.addChild(ad)
+  // ad.events.on('over', () => {
+  scene.start()
+  // })
 }
 
 window.onload = boot
