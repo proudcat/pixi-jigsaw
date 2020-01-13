@@ -1,9 +1,4 @@
-/**
- * configuration file
- * to config all the resouces and contant here
- */
-
-//basic game infomation
+//meta infomation
 export const meta = {
   name: 'jigsaw puzzle',
   version: '1.0.0',
@@ -12,8 +7,7 @@ export const meta = {
 }
 
 /**
- * i18n text files
- * 
+ * i18n
  */
 export const i18n = {
   'en': 'assets/i18n/en.json',
@@ -24,6 +18,7 @@ export const viewRect = null
 
 //resouce list
 export const resources = [
+  //configuration for i18n images or sounds or atlas(.json) etc.
   // {
   //   name: 'result',
   //   i18n: {
