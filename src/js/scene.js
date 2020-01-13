@@ -1,9 +1,9 @@
-import * as PIXI from 'pixi.js'
+import {TextStyle,Container,Sprite,Text} from 'pixi.js'
 
 import Jigsaw from './jigsaw'
 import Result from './result'
 
-const STYLE_WHITE = new PIXI.TextStyle({
+const STYLE_WHITE = new TextStyle({
   fontFamily: 'Arial',
   fontSize: 46,
   fontWeight: 'bold',
@@ -19,17 +19,17 @@ let _countdown = TOTAL_TIME
 /**
  * scene of the game
  */
-export default class Scene extends PIXI.Container {
+export default class Scene extends Container {
 
   constructor() {
     super()
 
-    let bg = new PIXI.Sprite(app.res.bg.texture)
+    let bg = new Sprite(app.res.bg.texture)
     bg.anchor.set(0.5)
     this.addChild(bg)
 
     //reference map
-    let idol = new PIXI.Sprite(app.res.main.textures.puzzle)
+    let idol = new Sprite(app.res.main.textures.puzzle)
     idol.y = -198
     idol.x = -165
     idol.anchor.set(0.5)
@@ -37,7 +37,7 @@ export default class Scene extends PIXI.Container {
     this.addChild(idol)
 
     //countdown text
-    this.$time = new PIXI.Text(_countdown + '″', STYLE_WHITE)
+    this.$time = new Text(_countdown + '″', STYLE_WHITE)
     this.$time.anchor.set(0.5)
     this.$time.x = 170
     this.$time.y = -156

@@ -1,4 +1,8 @@
-import * as PIXI from 'pixi.js'
+import {
+  Texture,
+  Container,
+  Rectangle
+} from 'pixi.js'
 import Piece from './piece'
 
 
@@ -10,7 +14,7 @@ const GAP_SIZE = 2
  * caculate the position of the piece,drag the piece.
  * check the game is ended
  */
-export default class Jigsaw extends PIXI.Container {
+export default class Jigsaw extends Container {
   constructor(level, texture) {
     super()
 
@@ -22,20 +26,20 @@ export default class Jigsaw extends PIXI.Container {
     this.moveCount = 0
     // this.scale.set(1.4)
 
-    // this.back = new PIXI.Container()
-    // let bg = new PIXI.Sprite(app.res.bg.texture)
+    // this.back = new Container()
+    // let bg = new Sprite(app.res.bg.texture)
     // bg.anchor.set(0.5)
     // this.back.addChild(bg)
     // this.addChild(this.back)
 
     //layer of the pieces
-    this.pieces = new PIXI.Container()
+    this.pieces = new Container()
     this.pieces.y = 208
     this.pieces.x = -4
     this.addChild(this.pieces)
 
     //front layer, selected piece will lie on top of other pieces
-    this.select = new PIXI.Container()
+    this.select = new Container()
     this.select.y = 208
     this.select.x = -4
     this.addChild(this.select)
@@ -83,8 +87,8 @@ export default class Jigsaw extends PIXI.Container {
       //pick a piece from the texture
       let row = parseInt(shuffled_index[ii] / this.level)
       let col = shuffled_index[ii] % this.level
-      let frame = new PIXI.Rectangle(col * this.piece_width, row * this.piece_height, this.piece_width, this.piece_height)
-      let piece = new Piece(new PIXI.Texture(this.texture, frame), ii, shuffled_index[ii])
+      let frame = new Rectangle(col * this.piece_width, row * this.piece_height, this.piece_width, this.piece_height)
+      let piece = new Piece(new Texture(this.texture, frame), ii, shuffled_index[ii])
       let current_row = parseInt(ii / this.level)
       let current_col = ii % this.level
 
@@ -168,7 +172,7 @@ export default class Jigsaw extends PIXI.Container {
 
     let overlap = this.pieces.children.find(piece => {
       //the center position of the piece is in the other pieces boundry
-      let rect = new PIXI.Rectangle(piece.x, piece.y, piece.width, piece.height)
+      let rect = new Rectangle(piece.x, piece.y, piece.width, piece.height)
       return rect.contains(picked.center.x, picked.center.y)
     })
 
@@ -185,7 +189,7 @@ export default class Jigsaw extends PIXI.Container {
   }
 
   // createBack() {
-  //   const graphics = new PIXI.Graphics()
+  //   const graphics = new Graphics()
   //   this.pieces.children.forEach(piece => {
   //     graphics.lineStyle(2, 0xFEEB77, 1)
   //     graphics.beginFill(0x650a5A)

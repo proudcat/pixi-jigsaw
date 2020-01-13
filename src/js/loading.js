@@ -1,4 +1,9 @@
-import * as PIXI from 'pixi.js'
+import {
+  TextStyle,
+  Container,
+  Text,
+  Graphics
+} from 'pixi.js'
 import {
   meta
 } from './config'
@@ -16,7 +21,7 @@ import {
 /**
  * loading ui
  */
-export default class Loading extends PIXI.Container {
+export default class Loading extends Container {
 
   /**
    * @param {object} options   
@@ -42,7 +47,7 @@ export default class Loading extends PIXI.Container {
     let radius = 80
 
     //background mask
-    let bg = new PIXI.Graphics()
+    let bg = new Graphics()
     bg.moveTo(0, 0)
     bg.beginFill(0x000000, 0.8)
     bg.drawRect(-meta.width / 2, -meta.height / 2, meta.width, meta.height)
@@ -51,7 +56,7 @@ export default class Loading extends PIXI.Container {
 
     //create 8 arcs
     for (let i = 0; i < 8; i++) {
-      let arc = new PIXI.Graphics()
+      let arc = new Graphics()
       arc.lineStyle(16, 0xffffff, 1, 0.5)
       let startAngle = offsetAngle + gapAngle * i + arcAngle * i
       let endAngle = startAngle + arcAngle
@@ -60,11 +65,11 @@ export default class Loading extends PIXI.Container {
     }
 
     //create ratating arc
-    let mask = new PIXI.Graphics()
+    let mask = new Graphics()
     this.addChild(mask)
 
     if (this.options.progress) {
-      this.indicatorText = new PIXI.Text('0%', new PIXI.TextStyle({
+      this.indicatorText = new Text('0%', new TextStyle({
         fontFamily: 'Arial',
         fontSize: 20,
         fill: '#ffffff',

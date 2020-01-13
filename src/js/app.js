@@ -93,9 +93,9 @@ export default class Application extends PIXI.Application {
   }
 
   /**
- * load all resources
- * @param {*} baseUrl 
- */
+   * load all resources
+   * @param {*} baseUrl 
+   */
   load(baseUrl) {
 
     let loader = new PIXI.Loader(baseUrl)
@@ -104,7 +104,10 @@ export default class Application extends PIXI.Application {
 
     config.resources.forEach(res => {
       if (res.i18n) {
-        loader.add({ name: res.name, url: res.i18n[app.i18n.language] })
+        loader.add({
+          name: res.name,
+          url: res.i18n[app.i18n.language]
+        })
       } else {
         loader.add(res)
       }
@@ -113,7 +116,7 @@ export default class Application extends PIXI.Application {
     loader
       .on('start', () => console.log('load start'))
       // .on('progress', (loader, res) => console.log(`loading: ${res.url}`))
-      .on('load', (loader, res) => console.log(`loaded:  ${res.url}`))
+      .on('load', (loader, res) => console.log(`loaded: ${res.url}`))
       .on('error', err => {
         console.warn(err)
         loader.reset()

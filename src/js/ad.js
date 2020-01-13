@@ -1,4 +1,8 @@
-import * as PIXI from 'pixi.js'
+import {
+  utils,
+  Container,
+  Graphics
+} from 'pixi.js'
 import Loading from './loading'
 import {
   meta
@@ -7,20 +11,20 @@ import {
 /**
  * video advertisement module
  */
-export default class VideoAd extends PIXI.Container {
+export default class VideoAd extends Container {
 
   constructor() {
     super()
-    this.events = new PIXI.utils.EventEmitter()
+    this.events = new utils.EventEmitter()
 
-    this.bg = new PIXI.Graphics()
+    this.bg = new Graphics()
     this.bg.moveTo(0, 0)
     this.bg.beginFill(0x000000, 0.8)
     this.bg.drawRect(-meta.width / 2, -meta.height / 2, meta.width, meta.height)
     this.bg.interactive = true
     this.addChild(this.bg)
 
-    this.startButton = new PIXI.Graphics()
+    this.startButton = new Graphics()
       .beginFill(0x0, 0.5)
       .drawRoundedRect(0, 0, 100, 100, 10)
       .endFill()

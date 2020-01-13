@@ -1,7 +1,9 @@
 /**
  * entrance file
  */
-import * as PIXI from 'pixi.js'
+import {
+  Container
+} from 'pixi.js'
 import *  as config from './config'
 
 import Application from './app'
@@ -12,9 +14,9 @@ import swal from 'sweetalert'
 
 //layers of the game
 const layers = {
-  back: new PIXI.Container(),
-  scene: new PIXI.Container(),
-  ui: new PIXI.Container()
+  back: new Container(),
+  scene: new Container(),
+  ui: new Container()
 }
 
 /**

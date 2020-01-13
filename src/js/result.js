@@ -1,4 +1,11 @@
-import * as PIXI from 'pixi.js'
+
+import {
+  TextStyle,
+  Container,
+  Sprite,
+  Text,
+  Graphics
+} from 'pixi.js'
 
 import {
   meta
@@ -7,27 +14,27 @@ import {
 /**
  * game result page
  */
-export default class Result extends PIXI.Container {
+export default class Result extends Container {
   constructor() {
     super()
     this.visible = false
 
-    let bg = new PIXI.Graphics()
+    let bg = new Graphics()
     bg.moveTo(0, 0)
     bg.beginFill(0x000000, 0.8)
     bg.drawRect(-meta.width / 2, -meta.height / 2, meta.width, meta.height)
     bg.interactive = true
     this.addChild(bg)
 
-    this.$win = new PIXI.Container()
-    let win_icon = new PIXI.Sprite(app.res.main.textures.win)
+    this.$win = new Container()
+    let win_icon = new Sprite(app.res.main.textures.win)
     win_icon.anchor.set(0.5)
     win_icon.y = -160
 
     this.$win.addChild(win_icon)
 
     //获得钻技UU锅一个
-    let win_text = new PIXI.Text(app.i18n.get('result.win', { prize: app.i18n.get('prize.win') }), new PIXI.TextStyle({
+    let win_text = new Text(app.i18n.get('result.win', { prize: app.i18n.get('prize.win') }), new TextStyle({
       fontFamily: 'Arial',
       fontSize: 40,
       fontWeight: 'bold',
@@ -36,7 +43,7 @@ export default class Result extends PIXI.Container {
     win_text.anchor.set(0.5)
     this.$win.addChild(win_text)
 
-    let win_button = new PIXI.Sprite(app.res.main.textures.button_get)
+    let win_button = new Sprite(app.res.main.textures.button_get)
     win_button.anchor.set(0.5)
     win_button.y = 80
     win_button.interactive = true
@@ -47,9 +54,9 @@ export default class Result extends PIXI.Container {
     })
     this.$win.addChild(win_button)
 
-    this.$fail = new PIXI.Container()
+    this.$fail = new Container()
 
-    let fail_icon = new PIXI.Sprite(app.res.main.textures.fail)
+    let fail_icon = new Sprite(app.res.main.textures.fail)
     fail_icon.y = -200
     fail_icon.anchor.set(0.5)
     fail_icon.interactive = true
@@ -61,7 +68,7 @@ export default class Result extends PIXI.Container {
     this.$fail.addChild(fail_icon)
 
     //获得钻技UU锅优惠券一张
-    let fail_text = new PIXI.Text(app.i18n.get('result.fail', { prize: app.i18n.get('prize.fail') }), new PIXI.TextStyle({
+    let fail_text = new Text(app.i18n.get('result.fail', { prize: app.i18n.get('prize.fail') }), new TextStyle({
       fontFamily: 'Arial',
       fontSize: 40,
       fontWeight: 'bold',

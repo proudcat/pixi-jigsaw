@@ -1,9 +1,11 @@
-import * as PIXI from 'pixi.js'
-
+import {
+  Sprite,
+  utils
+} from 'pixi.js'
 /**
  * Piece class
  */
-export default class Piece extends PIXI.Sprite {
+export default class Piece extends Sprite {
 
   /**
    * 
@@ -27,7 +29,7 @@ export default class Piece extends PIXI.Sprite {
     this.interactive = true
 
     //event emitter
-    this.events = new PIXI.utils.EventEmitter()
+    this.events = new utils.EventEmitter()
 
     //listen on the drag event
     this
