@@ -1,0 +1,6 @@
+{
+  "result.win": "你赢得了{{prize}} ",
+  "result.fail": "你获得了{{prize}}",
+  "prize.win": "一个平底锅",
+  "prize.fail": "一张优惠券"
+}

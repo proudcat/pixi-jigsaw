@@ -23,7 +23,7 @@ function copyAssets() {
   return src(['src/**/*', '!src/js/**'])
     .pipe(gulpif(
       file => {
-        return path.extname(file.relative) === '.png'
+        return argv.mode == 'production' && path.extname(file.relative) === '.png'
       },
       imagemin([imagemin.optipng({
         optimizationLevel: 3

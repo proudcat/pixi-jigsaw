@@ -1,0 +1,6 @@
+{
+  "result.win": "you win {{prize}} ",
+  "result.fail": "you got {{prize}}",
+  "prize.win": "a pan",
+  "prize.fail": "a coupon"
+}

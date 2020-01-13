@@ -25,6 +25,7 @@
   "dependencies": {
     "@babel/runtime": "^7.7.7",
     "core-js": "^3.6.2",
+    "mustache": "^3.2.1",
     "pixi-sound": "^3.0.4",
     "pixi.js": "^5.2.0",
     "sweetalert": "^2.1.2",

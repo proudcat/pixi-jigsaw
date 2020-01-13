@@ -2,12 +2,8 @@
  * entrance file
  */
 import * as PIXI from 'pixi.js'
-import {
-  META,
-  RESOURCES
-} from './config'
+import *  as config from './config'
 
-import Sound from './sound'
 import Application from './app'
 import Loading from './loading'
 import VideoAd from './ad'
@@ -25,7 +21,23 @@ const layers = {
  * boot the application
  */
 async function boot() {
-  init()
+
+  document.title = config.META.name
+
+  window.app = new Application({
+    width: config.META.width,
+    height: config.META.height,
+    view: document.querySelector('#scene'),
+    transparent: true
+  })
+
+  //create layers and postioned at the center of the screen.
+  for (const key in layers) {
+    let layer = layers[key]
+    app.stage.addChild(layer)
+    layer.x = config.META.width / 2
+    layer.y = config.META.height / 2
+  }
 
   try {
     await load()
@@ -34,75 +46,33 @@ async function boot() {
       title: 'load resource failed',
       text: error, icon: 'error',
       button: 'reload'
+    }).then((value) => {
+      if (value) {
+        boot()
+      }
     })
-      .then((value) => {
-        if (value) {
-          boot()
-        }
-      })
     return
   }
   create()
 }
 
-/**
- * init the application
- */
-function init() {
-
-  document.title = META.name
-
-  window.app = new Application({
-    width: META.width,
-    height: META.height,
-    view: document.querySelector('#scene'),
-    transparent: true
-  })
-
-  app.sound = new Sound()
-
-  //create layers and postioned at the center of the screen.
-  for (const key in layers) {
-    let layer = layers[key]
-    app.stage.addChild(layer)
-    layer.x = META.width / 2
-    layer.y = META.height / 2
-  }
-}
-
-/**
- * load all resources
- * @param {*} baseUrl 
- */
-function load(baseUrl) {
+function load() {
 
   let promise = new Promise((resolve, reject) => {
 
     let loading = new Loading()
     layers.ui.addChild(loading)
 
-    let loader = new PIXI.Loader(baseUrl)
-    loader.defaultQueryString = `v=${META.version}`
+    let loader = app.load()
 
-    RESOURCES.forEach(res => loader.add(res))
-
-    loader
-      .on('progress', (loader, res) => {
-        console.log(`loading: ${parseInt(loader.progress)}, ${res.url}`)
-        loading.progress = loader.progress
-      })
-      .on('error', (err, ctx, res) => {
-        console.error(`load res failed:${res.url}`)
-        loader.reset()
-        reject(res.url)
-      })
-      .load((loader, res) => {
-        console.log('load res completed')
-        loading.destroy()
-        app.res = res
-        resolve()
-      })
+    loader.onProgress.add(() => loading.progress = parseInt(loader.progress))
+    loader.onError.add((err, loader, res) => reject(res.url))
+    loader.onComplete.add(() => {
+      resolve()
+      loading.destroy()
+    })
   })
+
   return promise
 }
 

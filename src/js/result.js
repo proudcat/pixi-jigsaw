@@ -27,7 +27,7 @@ export default class Result extends PIXI.Container {
     this.$win.addChild(win_icon)
 
     //获得钻技UU锅一个
-    let win_text = new PIXI.Text('you win', new PIXI.TextStyle({
+    let win_text = new PIXI.Text(app.i18n.get('result.win', { prize: app.i18n.get('prize.win') }), new PIXI.TextStyle({
       fontFamily: 'Arial',
       fontSize: 40,
       fontWeight: 'bold',
@@ -61,7 +61,7 @@ export default class Result extends PIXI.Container {
     this.$fail.addChild(fail_icon)
 
     //获得钻技UU锅优惠券一张
-    let fail_text = new PIXI.Text('you failed', new PIXI.TextStyle({
+    let fail_text = new PIXI.Text(app.i18n.get('result.fail', { prize: app.i18n.get('prize.fail') }), new PIXI.TextStyle({
       fontFamily: 'Arial',
       fontSize: 40,
       fontWeight: 'bold',

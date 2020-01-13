@@ -1,4 +1,7 @@
 import * as PIXI from 'pixi.js'
+import Sound from './sound'
+import I18N from './i18n'
+import * as config from './config'
 
 import {
   throttle
@@ -13,15 +16,16 @@ export default class Application extends PIXI.Application {
   /**
    * constructor
    * @param {jsonobject} options same as PIXI.Application constrctor options parameter
-   * @param {*} viewRect the viewport area of the canvas
    */
-  constructor(options, viewRect) {
+  constructor(options) {
 
     //to disable PIXI ResizePlugin to resize the canvas.
     options.resizeTo = undefined
 
     super(options)
-    this.viewRect = viewRect
+
+    //the viewport area of the canvas
+    this.viewRect = config.viewRect
 
     //optimize the resize invoke rate
     window.addEventListener('resize', throttle(300, () => {
@@ -32,6 +36,10 @@ export default class Application extends PIXI.Application {
     }))
 
     this.autoResize(this.viewRect)
+
+    this.sound = new Sound()
+    this.i18n = new I18N(config.i18n)
+
   }
 
   /**
@@ -83,5 +91,41 @@ export default class Application extends PIXI.Application {
       item.style.width = `${width}px`
       item.style.height = `${height}px`
     })
+  }
+
+
+  /**
+ * load all resources
+ * @param {*} baseUrl 
+ */
+  load(baseUrl) {
+
+    let loader = new PIXI.Loader(baseUrl)
+    loader.defaultQueryString = `v=${config.META.version}`
+    loader.add(app.i18n.file)
+
+    config.RESOURCES.forEach(res => {
+      if (res.i18n) {
+        loader.add({ name: res.name, url: res.i18n[app.i18n.language] })
+      }
+      loader.add(res)
+    })
+
+    loader
+      .on('start', () => console.log('load start'))
+      // .on('progress', (loader, res) => console.log(`loading: ${res.url}`))
+      .on('load', (loader, res) => console.log(`loaded:  ${res.url}`))
+      .on('error', err => {
+        console.warn(err)
+        loader.reset()
+      })
+      .load((loader, res) => {
+        console.log('load completed!')
+        app.res = res
+        app.i18n.add(res[app.i18n.file].data)
+        delete res[app.i18n.file]
+      })
+
+    return loader
   }
 }
