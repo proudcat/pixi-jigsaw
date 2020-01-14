@@ -11,7 +11,7 @@
 ### 快速开始
 * 需要安装`nodejs`环境。
 * 在项目根目录运行`npm install`来安装项目依赖的库。
-* 运行`npm start`启动`http`服务器，然后浏览器访问`http://localhost:9090`就能看到项目效果。
+* 运行`npm start`启动`http`服务器，然后浏览器访问`http://localhost:8080`就能看到项目效果。
 
 ### 需要会的技术栈(你能学到什么)
 * 使用`pixi.js`v5版本。
