@@ -41,20 +41,16 @@ async function boot() {
     layer.y = config.meta.height / 2
   }
 
-  try {
-    await load()
-  } catch (error) {
-    swal({
-      title: 'load resource failed',
-      text: error, icon: 'error',
-      button: 'reload'
-    }).then((ok) => {
-      if (ok) {
-        boot()
-      }
-    })
-    return
-  }
+  await load().catch(error => swal({
+    title: 'load resource failed',
+    text: error, icon: 'error',
+    button: 'reload'
+  }).then((ok) => {
+    if (ok) {
+      boot()
+    }
+  }))
+
   create()
 }
 
