@@ -119,7 +119,6 @@ export default class Application extends PIXI.Application {
       .on('load', (loader, res) => console.log(`loaded: ${res.url}`))
       .on('error', err => {
         console.warn(err)
-        loader.reset()
       })
       .load((loader, res) => {
         console.log('load completed!')

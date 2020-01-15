@@ -48,8 +48,8 @@ async function boot() {
       title: 'load resource failed',
       text: error, icon: 'error',
       button: 'reload'
-    }).then((value) => {
-      if (value) {
+    }).then((ok) => {
+      if (ok) {
         boot()
       }
     })
