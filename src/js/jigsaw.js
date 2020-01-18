@@ -117,16 +117,7 @@ export default class Jigsaw extends Container {
           if (target) {
             this.moveCount++
             this._swap(picked, target)
-
             target.tint = 0xFFFFFF
-
-            //check is win
-            let success = this._checkSuccess()
-            if (success) {
-              this.success = true
-              console.log('success', this.moveCount)
-            }
-
           } else {
             picked.x = picked.origin_x
             picked.y = picked.origin_y
@@ -154,10 +145,14 @@ export default class Jigsaw extends Container {
   /**
    * check is win the game
    */
-  _checkSuccess() {
+  get success() {
 
     //if all pieces is in the right position
     let success = this.$pieces.children.every(piece => piece.currentIndex == piece.targetIndex)
+
+    if (success) {
+      console.log('success', this.moveCount)
+    }
 
     return success
   }
