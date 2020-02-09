@@ -15,7 +15,7 @@ export default class VideoAd extends Container {
 
   constructor() {
     super()
-    this.events = new utils.EventEmitter()
+    utils.EventEmitter.call(this)
 
     this.bg = new Graphics()
     this.bg.moveTo(0, 0)
@@ -53,7 +53,7 @@ export default class VideoAd extends Container {
   //   app.resize()
 
   //   video.onended = () => {
-  //     this.events.emit('over')
+  //     this.emit('over')
   //     video.remove()
   //   }
 
@@ -83,7 +83,7 @@ export default class VideoAd extends Container {
 
     video.onended = () => {
       video.remove()
-      this.events.emit('over')
+      this.emit('over')
       this.destroy(true)
     }
 
@@ -91,3 +91,5 @@ export default class VideoAd extends Container {
     video.play()
   }
 }
+
+Object.assign(VideoAd.prototype, utils.EventEmitter.prototype)

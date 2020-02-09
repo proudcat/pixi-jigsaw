@@ -1,4 +1,5 @@
 import * as PIXI from 'pixi.js'
+
 import Sound from './sound'
 import I18N from './i18n'
 import * as config from './config'
@@ -23,6 +24,7 @@ export default class Application extends PIXI.Application {
     options.resizeTo = undefined
 
     super(options)
+    PIXI.utils.EventEmitter.call(this)
 
     //the viewport area of the canvas
     this.viewRect = config.viewRect
@@ -114,19 +116,31 @@ export default class Application extends PIXI.Application {
     })
 
     loader
-      .on('start', () => console.log('load start'))
-      // .on('progress', (loader, res) => console.log(`loading: ${res.url}`))
-      .on('load', (loader, res) => console.log(`loaded: ${res.url}`))
-      .on('error', err => {
+      .on('start', () => {
+        console.log('loader:start')
+        this.emit('loader:start')
+      })
+      .on('progress', (loader, res) => {
+        this.emit('load:progress', parseInt(loader.progress))
+      })
+      .on('load', (loader, res) => {
+        console.log(`loader:load ${res.url}`)
+        // this.emit('load:res', res.url)
+      })
+      .on('error', (err, loader, res) => {
         console.warn(err)
+        this.emit('loader:error', res.url)
       })
       .load((loader, res) => {
-        console.log('load completed!')
+        console.log('loader:completed')
         app.res = res
         this.i18n.add(res[this.i18n.file].data)
         delete res[this.i18n.file]
+        this.emit('loader:complete', res)
       })
 
     return loader
   }
 }
+
+Object.assign(Application.prototype, PIXI.utils.EventEmitter.prototype)

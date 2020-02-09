@@ -22,14 +22,12 @@ export default class Piece extends Sprite {
    */
   constructor(texture, currentIndex, targetIndex) {
     super(texture)
+    utils.EventEmitter.call(this)
 
     this.currentIndex = currentIndex
     this.targetIndex = targetIndex
 
     this.interactive = true
-
-    //event emitter
-    this.events = new utils.EventEmitter()
 
     //listen on the drag event
     this
@@ -59,7 +57,7 @@ export default class Piece extends Sprite {
     this.origin_x = this.x
     this.origin_y = this.y
 
-    this.events.emit('dragstart', this)
+    this.emit('dragstart', this)
   }
 
   /**
@@ -70,7 +68,7 @@ export default class Piece extends Sprite {
       const pos = this.data.getLocalPosition(this.parent)
       this.x = pos.x - this.offset_x
       this.y = pos.y - this.offset_y
-      this.events.emit('dragmove', this)
+      this.emit('dragmove', this)
     }
   }
 
@@ -82,7 +80,7 @@ export default class Piece extends Sprite {
       this.dragging = false
       this.alpha = 1
       this.data = null
-      this.events.emit('dragend', this)
+      this.emit('dragend', this)
     }
   }
 
@@ -96,3 +94,5 @@ export default class Piece extends Sprite {
     }
   }
 }
+
+Object.assign(Piece.prototype, utils.EventEmitter.prototype)

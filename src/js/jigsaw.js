@@ -96,7 +96,7 @@ export default class Jigsaw extends Container {
       piece.x = current_col * this.piece_width - offset_x + GAP_SIZE * current_col
       piece.y = current_row * this.piece_height - offset_y + GAP_SIZE * current_row
 
-      piece.events
+      piece
         .on('dragstart', (picked) => {
           //put the selected（drag and move） piece on top of the others pieces.
           this.$pieces.removeChild(picked)

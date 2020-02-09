@@ -52,14 +52,23 @@ function loadRes() {
     let loading = new Loading()
     layers.ui.addChild(loading)
 
-    let loader = app.load()
 
-    loader.onProgress.add(() => loading.progress = parseInt(loader.progress))
-    loader.onError.add((err, loader, res) => reject(res.url))
-    loader.onComplete.add(() => {
+    app.on('loader:progress', progress => loading.progress = progress)
+    app.on('loader:error', error => reject(error))
+
+    app.on('loader:complete', () => {
       resolve()
       loading.destroy()
     })
+
+    app.load()
+
+    // loader.onProgress.add(() => loading.progress = parseInt(loader.progress))
+    // loader.onError.add((err, loader, res) => reject(res.url))
+    // loader.onComplete.add(() => {
+    //   resolve()
+    //   loading.destroy()
+    // })
   })
 
   return promise
@@ -75,7 +84,7 @@ function setup() {
 
   // let ad = new VideoAd()
   // layers.ui.addChild(ad)
-  // ad.events.on('over', () => {
+  // ad.on('over', () => {
   scene.start()
   // })
 }
