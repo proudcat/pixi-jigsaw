@@ -4,7 +4,7 @@
 import {
   Container
 } from 'pixi.js'
-import *  as config from './config'
+import * as config from './config'
 
 import Application from './app'
 import Loading from './loading'
@@ -40,21 +40,12 @@ async function boot() {
     layer.x = config.meta.width / 2
     layer.y = config.meta.height / 2
   }
-
-  await load().catch(error => swal({
-    title: 'load resource failed',
-    text: error, icon: 'error',
-    button: 'reload'
-  }).then((ok) => {
-    if (ok) {
-      boot()
-    }
-  }))
-
-  create()
 }
 
-function load() {
+/**
+ * preload all game resoruces
+ */
+function loadRes() {
 
   let promise = new Promise((resolve, reject) => {
 
@@ -75,9 +66,9 @@ function load() {
 }
 
 /**
- * create the game scene
+ * setup the game scene
  */
-function create() {
+function setup() {
 
   let scene = new Scene()
   layers.scene.addChild(scene)
@@ -89,4 +80,27 @@ function create() {
   // })
 }
 
-window.onload = boot
+window.onload = async () => {
+
+  boot()
+
+  try {
+    await loadRes()
+  } catch (error) {
+    let reload = await swal({
+      title: 'load resource failed',
+      text: error,
+      icon: 'error',
+      button: 'reload'
+    })
+
+    if (reload) {
+      location.reload(true)
+    }
+
+    return
+  }
+
+  setup()
+
+}
