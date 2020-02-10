@@ -7,12 +7,11 @@ const {
 } = require('gulp')
 
 const del = require('del')
-const argv = require('yargs').argv
 const path = require('path')
 const gulpif = require('gulp-if')
 const imagemin = require('gulp-imagemin')
 const webpack = require('webpack')
-const webpack_config = require('./webpack.config')
+const webpack_config = require('./webpack.prod')
 
 function clean(next) {
   del.sync('dist')
@@ -22,9 +21,7 @@ function clean(next) {
 function copyAssets() {
   return src(['src/**/*', '!src/js/**'])
     .pipe(gulpif(
-      file => {
-        return argv.mode == 'production' && path.extname(file.relative) === '.png'
-      },
+      file => path.extname(file.relative) === '.png',
       imagemin([imagemin.optipng({
         optimizationLevel: 3
       })], {
@@ -34,8 +31,6 @@ function copyAssets() {
 }
 
 function jsBundle(next) {
-  webpack_config.mode = argv.mode
-
   const compiler = webpack(webpack_config)
 
   compiler.run((err, stats) => {

@@ -11,7 +11,7 @@
 ### Setup
 * you should have `nodejs` installed.
 * run `npm install` command to install the dependencies.
-* run `npm start` command to start `http` server, then you can play the game by accessing the URL `http://localhost:8080`.
+* run `npm start` command to start the project,it will open chrome browser automically.
 
 ### Required Knowledge
 * based on pixi.js version 5.2.
@@ -25,11 +25,12 @@
 * `res`: `texturepacker` project and original font files etc.
 * `src`:all game resource and source code.
 * `dist`: distribute the final game project here.
-* `.webpack.config.js`: webpack configuration file.
+* `.webpack.common.js`: webpack common configuration file.
+* `.webpack.dev.js`: webpack configuration file for development.
+* `.webpack.prod.js`: webpack common configuration file for produciton.
 * `.gulpfile.js`:`gulp` configuration file.
 * `package.json`: `node` configuration file.
 
 
 ### Distribution
-* run `npm run debug` command to build the project with `debug` version, all the files will copy into `dist` directory with out any optimization.
-* run `npm run dist`command to `release` the project, all the files will copy into `dist` directory, all `.js` files will combined and obfuscate, all pictures will be optimized.
+* run `npm run dist`command to `release` the project, all the files will copy into `dist` directory, all `.js` files will combined and obfuscated, all pictures will be optimized.

@@ -1,19 +1,9 @@
-const path = require('path')
+const merge = require('webpack-merge')
+const common = require('./webpack.common.js')
 
-module.exports = {
-  entry: ['./src/js/main.js'],
-  // mode: 'none',
-  output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'game.min.js',
-  },
-  target: 'web',
-  devServer: {
-    contentBase: path.join(__dirname, 'dist'),
-    port: 8080,
-    host: '0.0.0.0',
-    hot: true
-  },
+module.exports = merge(common, {
+  'mode':'production',
+  devtool: 'source-map',
   module: {
     rules: [{
       test: /\.js$/,
@@ -32,4 +22,4 @@ module.exports = {
       }
     }]
   }
-}
+})

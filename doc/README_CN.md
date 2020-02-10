@@ -11,7 +11,7 @@
 ### 快速开始
 * 需要安装`nodejs`环境。
 * 在项目根目录运行`npm install`来安装项目依赖的库。
-* 运行`npm start`启动`http`服务器，然后浏览器访问`http://localhost:8080`就能看到项目效果。
+* 运行`npm start`启动项目服务器，将自动打开chrome浏览器。
 
 ### 需要会的技术栈(你能学到什么)
 * 使用`pixi.js`v5版本。
@@ -25,7 +25,9 @@
 * `res`: 存放工程文件,例如`texturepacker`图集项目，字体等等。
 * `src`: 存放完整游戏项目，包括自己编写的`js`，第三方库，游戏资源(图片，音频等等)，游戏的`html`页面。
 * `dist`: 此目录为构建脚本动态生成，存放构建完成的项目文件，每次构建都会重新生成这个目录。
-* `.webpack.config.js`文件: webpack脚本。
+* `.webpack.common.js`文件: webpack公共脚本。
+* `.webpack.dev.js`文件: webpack开发配置脚本。
+* `.webpack.prod.js`文件: webpack发布配置脚本。
 * `.gulpfile.js`文件:`gulp`构建脚本，用于发布项目时候时候构建和优化整个项目。
 * `package.json`文件: `node`项目的配置文件。
 
