@@ -3,8 +3,19 @@
   "main": "src/js/main.js",
   "version": "0.1.0",
   "private": true,
+  "keywords": [
+    "pixi.js",
+    "webpack",
+    "gulp",
+    "babel",
+    "es6",
+    "game",
+    "web",
+    "html5"
+  ],
+  "author": "yulijun",
   "scripts": {
-    "start": "webpack-dev-server --open 'google chrome' --progress --config webpack.dev.js",
+    "start": "webpack-dev-server --open 'google chrome' --config webpack.dev.js",
     "dist": "gulp dist",
     "build": "webpack --config webpack.prod.js"
   },
