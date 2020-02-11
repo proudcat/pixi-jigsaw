@@ -121,7 +121,7 @@ export default class Application extends PIXI.Application {
         this.emit('loader:start')
       })
       .on('progress', (loader, res) => {
-        this.emit('load:progress', parseInt(loader.progress))
+        this.emit('loader:progress', parseInt(loader.progress))
       })
       .on('load', (loader, res) => {
         console.log(`loader:load ${res.url}`)
