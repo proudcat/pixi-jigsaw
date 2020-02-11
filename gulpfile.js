@@ -2,21 +2,15 @@
 const {
   src,
   dest,
-  series,
+  // series,
   parallel
 } = require('gulp')
 
-const del = require('del')
 const path = require('path')
 const gulpif = require('gulp-if')
 const imagemin = require('gulp-imagemin')
 const webpack = require('webpack')
 const webpack_config = require('./webpack.prod')
-
-function clean(next) {
-  del.sync('dist')
-  next()
-}
 
 function copyAssets() {
   return src(['src/**/*', '!src/js/**'])
@@ -41,4 +35,5 @@ function jsBundle(next) {
   })
 }
 
-exports.dist = series(clean, parallel(copyAssets, jsBundle))
+// exports.dist = series(clean, parallel(copyAssets, jsBundle))
+exports.dist = parallel(copyAssets, jsBundle)

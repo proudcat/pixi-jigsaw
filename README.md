@@ -34,3 +34,7 @@
 
 ### Distribution
 * run `npm run dist`command to `release` the project, all the files will copy into `dist` directory, all `.js` files will combined and obfuscated, all pictures will be optimized.
+
+
+### TODO
+* remove gulp.

@@ -6,29 +6,33 @@
   "keywords": [
     "pixi.js",
     "webpack",
+    "game",
     "gulp",
     "babel",
     "es6",
-    "game",
+    "es7",
+    "es8",
     "web",
-    "html5"
+    "html5",
+    "javascript"
   ],
   "author": "yulijun",
   "scripts": {
     "start": "webpack-dev-server --open 'google chrome' --config webpack.dev.js",
-    "dist": "gulp dist",
-    "build": "webpack --config webpack.prod.js"
+    "clean": "rimraf dist",
+    "prebuild": "npm run clean",
+    "build": "gulp dist",
+    "build_webpack": "webpack --config webpack.prod.js"
   },
-  "vscode-pixi": {},
   "devDependencies": {
     "@babel/core": "^7.7.7",
     "@babel/plugin-transform-runtime": "^7.7.6",
     "@babel/preset-env": "^7.7.7",
     "babel-loader": "^8.0.6",
-    "del": "^5.1.0",
     "gulp": "^4.0.0",
     "gulp-if": "^2.0.2",
     "gulp-imagemin": "^4.1.0",
+    "rimraf": "^3.0.2",
     "webpack": "^4.41.5",
     "webpack-cli": "^3.1.2",
     "webpack-dev-server": "^3.10.1",
