@@ -82,6 +82,7 @@ function setup() {
   let scene = new Scene()
   layers.scene.addChild(scene)
 
+  //you can uncomment the code, you will play video first then start the game.
   // let ad = new VideoAd()
   // layers.ui.addChild(ad)
   // ad.on('over', () => {

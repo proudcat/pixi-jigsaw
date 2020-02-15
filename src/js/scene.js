@@ -28,7 +28,7 @@ export default class Scene extends Container {
     bg.anchor.set(0.5)
     this.addChild(bg)
 
-    //reference map
+    //reference image
     let idol = new Sprite(app.res.main.textures.puzzle)
     idol.y = -198
     idol.x = -165

@@ -11,8 +11,7 @@ const GAP_SIZE = 2
 
 /**
  * cut the picture into level * level pieces.
- * caculate the position of the piece,drag the piece.
- * check the game is ended
+ * caculate the position of the piece, manage interacton of a piece, check the game is ended.
  */
 export default class Jigsaw extends Container {
   constructor(level, texture) {
@@ -38,7 +37,7 @@ export default class Jigsaw extends Container {
     this.$pieces.x = -4
     this.addChild(this.$pieces)
 
-    //front layer, selected piece will lie on top of other pieces
+    //front layer, selected piece will on top of other pieces
     this.$select = new Container()
     this.$select.y = 208
     this.$select.x = -4
@@ -48,7 +47,13 @@ export default class Jigsaw extends Container {
   }
 
   /**
-   * shuffle, random place the pieces
+   * shuffle, random create the pieces index 
+   * index of piece（level=3 3*3 etc.）
+   * 0  1  2
+   * 3  4  5
+   * 6  7  8
+   * 
+   * suffle will return [3,8,6,2,5,1,4,0,7] etc.
    */
   _shuffle() {
 
@@ -84,17 +89,18 @@ export default class Jigsaw extends Container {
 
     for (let ii = 0; ii < shuffled_index.length; ii++) {
 
-      //pick a piece from the texture
-      let row = parseInt(shuffled_index[ii] / this.level)
-      let col = shuffled_index[ii] % this.level
-      let frame = new Rectangle(col * this.piece_width, row * this.piece_height, this.piece_width, this.piece_height)
+      //pick a piece from the big texture indicated by suffled indexes.
+      let frame_row = parseInt(shuffled_index[ii] / this.level)
+      let frame_col = shuffled_index[ii] % this.level
+      let frame = new Rectangle(frame_col * this.piece_width, frame_row * this.piece_height, this.piece_width, this.piece_height)
       let piece = new Piece(new Texture(this.texture, frame), ii, shuffled_index[ii])
-      let current_row = parseInt(ii / this.level)
-      let current_col = ii % this.level
-
-      //position of the piece
-      piece.x = current_col * this.piece_width - offset_x + GAP_SIZE * current_col
-      piece.y = current_row * this.piece_height - offset_y + GAP_SIZE * current_row
+      
+      
+      //add the piece to ui
+      let row = parseInt(ii / this.level)
+      let col = ii % this.level
+      piece.x = col * this.piece_width - offset_x + GAP_SIZE * col
+      piece.y = row * this.piece_height - offset_y + GAP_SIZE * row
 
       piece
         .on('dragstart', (picked) => {

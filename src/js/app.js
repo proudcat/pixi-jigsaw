@@ -10,7 +10,7 @@ import {
 
 /**
  * extends the PIXI.Application
- * add custom reize function
+ * customize reize/i18n/sound module
  */
 export default class Application extends PIXI.Application {
 
@@ -47,7 +47,7 @@ export default class Application extends PIXI.Application {
    * resize the canvas size and position to the center of the container 
    * fill the canvas to container widh constant game ratio(config.js meta.width/meta.height).
    * 
-   * pixi default ResizePlugin will change the canvas.width and canvas.height,thus it can't scale the canvas only padding the rest blank
+   * pixi default ResizePlugin will change the canvas.width and canvas.height,thus the canvas won't sacled, just enlarge the size to right and bottom.
    */
   autoResize() {
 
@@ -106,6 +106,8 @@ export default class Application extends PIXI.Application {
 
     config.resources.forEach(res => {
       if (res.i18n) {
+
+        //if has i18n res
         loader.add({
           name: res.name,
           url: res.i18n[this.i18n.language]
@@ -143,4 +145,5 @@ export default class Application extends PIXI.Application {
   }
 }
 
+//mixin EventEmitter
 Object.assign(Application.prototype, PIXI.utils.EventEmitter.prototype)

@@ -2,7 +2,7 @@ import { parseQueryString } from './util'
 import mustache from 'mustache'
 
 /**
- * internationalization
+ * internationalization module
  */
 export default class I18N {
 

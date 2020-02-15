@@ -33,7 +33,7 @@ export default class Result extends Container {
 
     this.$win.addChild(win_icon)
 
-    //获得钻技UU锅一个
+    //win text
     let win_text = new Text(app.i18n.get('result.win', { prize: app.i18n.get('prize.win') }), new TextStyle({
       fontFamily: 'Arial',
       fontSize: 40,
@@ -67,7 +67,7 @@ export default class Result extends Container {
     })
     this.$fail.addChild(fail_icon)
 
-    //获得钻技UU锅优惠券一张
+    //fail text
     let fail_text = new Text(app.i18n.get('result.fail', { prize: app.i18n.get('prize.fail') }), new TextStyle({
       fontFamily: 'Arial',
       fontSize: 40,

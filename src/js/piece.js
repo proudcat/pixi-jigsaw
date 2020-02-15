@@ -15,7 +15,7 @@ export default class Piece extends Sprite {
    *            when targetIndex == currentIndex means the piece is in the right positon,
    *            if all pieces in the right position you win the game.
    * 
-   * index of piece（3*3 etc.）
+   * index of piece（level=3 3*3 etc.）
    * 0  1  2
    * 3  4  5
    * 6  7  8
@@ -49,7 +49,7 @@ export default class Piece extends Sprite {
     //position of the mouse pointer(relative to the parent)
     let pointer_pos = this.data.getLocalPosition(this.parent)
 
-    //the offset between mouse pointer position and piece positon
+    //the offset between mouse pointer and piece positon
     this.offset_x = pointer_pos.x - this.x
     this.offset_y = pointer_pos.y - this.y
 

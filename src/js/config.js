@@ -1,3 +1,7 @@
+/**
+ * all configuration for the game
+ */
+
 //meta infomation
 export const meta = {
   name: 'jigsaw puzzle',
@@ -16,16 +20,8 @@ export const i18n = {
 
 export const viewRect = null
 
-//resouce list
+//resource list
 export const resources = [
-  //configuration for i18n images or sounds or atlas(.json) etc.
-  {
-    name: 'bg',
-    i18n: {
-      'en': 'assets/image/bg_en.png',
-      'zh-cn': 'assets/image/bg_zh-cn.png',
-    }
-  },
   {
     name: 'main',
     url: 'assets/image/main.json'
@@ -38,4 +34,13 @@ export const resources = [
   }, {
     name: 'sound_fail',
     url: 'assets/audio/fail.mp3'
+  },  
+  
+  //configuration for i18n image or sound or atlas(.json) etc.
+  {
+    name: 'bg',
+    i18n: {
+      'en': 'assets/image/bg_en.png',
+      'zh-cn': 'assets/image/bg_zh-cn.png',
+    }
   }]

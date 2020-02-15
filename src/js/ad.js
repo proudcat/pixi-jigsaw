@@ -9,7 +9,7 @@ import {
 } from './config'
 
 /**
- * video advertisement module
+ * advertisement video  module
  */
 export default class VideoAd extends Container {
 
@@ -60,7 +60,11 @@ export default class VideoAd extends Container {
   //   video.play()
   // }
 
-  //wechat browser can not load video by pixi.js loader,so we manually load the video
+  
+  /** 
+   * play ad video
+   * wechat browser can not load video by pixi.js loader,so we manually load the video
+   **/
   play() {
     this.startButton.visible = false
     this.bg.visible = false
