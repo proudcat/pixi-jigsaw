@@ -4,9 +4,7 @@ import {
   Graphics
 } from 'pixi.js'
 import Loading from './loading'
-import {
-  meta
-} from './config'
+import * as config from './config'
 
 /**
  * advertisement video  module
@@ -20,7 +18,7 @@ export default class VideoAd extends Container {
     this.bg = new Graphics()
     this.bg.moveTo(0, 0)
     this.bg.beginFill(0x000000, 0.8)
-    this.bg.drawRect(-meta.width / 2, -meta.height / 2, meta.width, meta.height)
+    this.bg.drawRect(-config.width / 2, -config.height / 2, config.width, config.height)
     this.bg.interactive = true
     this.addChild(this.bg)
 

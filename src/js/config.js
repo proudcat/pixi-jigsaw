@@ -2,13 +2,17 @@
  * all configuration for the game
  */
 
-//meta infomation
-export const meta = {
-  name: 'jigsaw puzzle',
-  version: '1.0.0',
-  width: 796,
-  height: 1280
-}
+//with of the canvas
+export const width = 796
+
+//height of the canvas
+export const height = 1280
+
+//game name
+export const name='jigsaw'
+
+//game version
+export const version = '1.0.0'
 
 /**
  * i18n

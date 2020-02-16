@@ -45,7 +45,7 @@ export default class Application extends PIXI.Application {
 
   /**
    * resize the canvas size and position to the center of the container 
-   * fill the canvas to container widh constant game ratio(config.js meta.width/meta.height).
+   * fill the canvas to container widh constant game ratio(config.js config.width/config.height).
    * 
    * pixi default ResizePlugin will change the canvas.width and canvas.height,thus the canvas won't sacled, just enlarge the size to right and bottom.
    */
@@ -76,15 +76,6 @@ export default class Application extends PIXI.Application {
     let x = viewRect.x + (viewRect.width - width) / 2
     let y = viewRect.y + (viewRect.height - height) / 2
 
-    //center the canvas to the father
-    this.view.style.left = `${x}px`
-    this.view.style.top = `${y}px`
-    // this.view.style.left = viewRect.x + 'px'
-    // this.view.style.top = viewRect.y + 'px'
-
-    this.view.style.width = `${width}px`
-    this.view.style.height = `${height}px`
-
     let autofitItems = document.querySelectorAll('.autofit')
     autofitItems.forEach(item => {
       item.style.left = `${x}px`
@@ -101,7 +92,7 @@ export default class Application extends PIXI.Application {
   load(baseUrl) {
 
     let loader = new PIXI.Loader(baseUrl)
-    loader.defaultQueryString = `v=${config.meta.version}`
+    loader.defaultQueryString = `v=${config.version}`
     loader.add(this.i18n.file)
 
     config.resources.forEach(res => {
@@ -134,7 +125,7 @@ export default class Application extends PIXI.Application {
         this.emit('loader:error', res.url)
       })
       .load((loader, res) => {
-        console.log('loader:completed')
+        console.log('loader:complete')
         app.res = res
         this.i18n.add(res[this.i18n.file].data)
         delete res[this.i18n.file]

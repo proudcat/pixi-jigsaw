@@ -23,13 +23,6 @@ export default class Jigsaw extends Container {
 
     //how many step have you moved
     this.moveCount = 0
-    // this.scale.set(1.4)
-
-    // this.back = new Container()
-    // let bg = new Sprite(app.res.bg.texture)
-    // bg.anchor.set(0.5)
-    // this.back.addChild(bg)
-    // this.addChild(this.back)
 
     //layer of the pieces
     this.$pieces = new Container()

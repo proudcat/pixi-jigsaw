@@ -24,11 +24,11 @@ const layers = {
  */
 async function boot() {
 
-  document.title = config.meta.name
+  document.title = config.name
 
   window.app = new Application({
-    width: config.meta.width,
-    height: config.meta.height,
+    width: config.width,
+    height: config.height,
     view: document.querySelector('#scene'),
     transparent: true
   })
@@ -37,8 +37,8 @@ async function boot() {
   for (const key in layers) {
     let layer = layers[key]
     app.stage.addChild(layer)
-    layer.x = config.meta.width / 2
-    layer.y = config.meta.height / 2
+    layer.x = config.width / 2
+    layer.y = config.height / 2
   }
 }
 
@@ -52,7 +52,6 @@ function loadRes() {
     let loading = new Loading()
     layers.ui.addChild(loading)
 
-
     app.on('loader:progress', progress => loading.progress = progress)
     app.on('loader:error', error => reject(error))
 
@@ -62,13 +61,6 @@ function loadRes() {
     })
 
     app.load()
-
-    // loader.onProgress.add(() => loading.progress = parseInt(loader.progress))
-    // loader.onError.add((err, loader, res) => reject(res.url))
-    // loader.onComplete.add(() => {
-    //   resolve()
-    //   loading.destroy()
-    // })
   })
 
   return promise

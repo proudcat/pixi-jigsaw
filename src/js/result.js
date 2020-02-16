@@ -7,9 +7,7 @@ import {
   Graphics
 } from 'pixi.js'
 
-import {
-  meta
-} from './config'
+import * as config from './config'
 
 /**
  * game result page
@@ -22,7 +20,7 @@ export default class Result extends Container {
     let bg = new Graphics()
     bg.moveTo(0, 0)
     bg.beginFill(0x000000, 0.8)
-    bg.drawRect(-meta.width / 2, -meta.height / 2, meta.width, meta.height)
+    bg.drawRect(-config.width / 2, -config.height / 2, config.width, config.height)
     bg.interactive = true
     this.addChild(bg)
 
