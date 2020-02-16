@@ -2,8 +2,10 @@
 >这个教程面对初学者，通过创建一个拼图游戏，来演示怎么完整开发一款`pixi`游戏并最终发布。
 >
 >在此项目中可以学会`pixi`游戏开发时候怎么`划分模块`，怎么`加载资源`，怎么进行`屏幕自适应`，怎么播放`音频`和`视频`，怎么`分层`，怎么通过`继承pixi类`来扩展功能，怎么实现`多国语言`，怎么用`webpack`进行开发期的`调试`以及最终怎么`构建发布`游戏。
-
-详细讲解可参考我的博客 [segmentfault思否](https://segmentfault.com/a/1190000021726866) [简书](https://www.jianshu.com/p/0f5a4ee0306e)
+>
+>这个例子已经被收入官方wiki的tutorials里面了:《[How to make jigsaw game](https://github.com/pixijs/pixi.js/wiki/v5-Resources#tutorials)》
+>
+>详细讲解可参考我的博客 [segmentfault思否](https://segmentfault.com/a/1190000021726866)
 
 [体验地址](http://testactivity.goooku.com/ishop-demo/jigsaw/index.html) 
 

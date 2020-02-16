@@ -3,9 +3,10 @@
 > 
 > The source code is well commented, hope you can enjoy it.
 
+[中文文档](./doc/README_CN.md)
+
 [try the game](http://testactivity.goooku.com/ishop-demo/jigsaw/index.html) 
 
-[中文文档](./doc/README_CN.md)
 
 ### Screenshot
 ![demo](./doc/demo.png)
