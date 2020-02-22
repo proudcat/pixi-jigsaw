@@ -1,11 +1,34 @@
 const path = require('path')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
+const ImageminPlugin = require('imagemin-webpack-plugin').default
 
 module.exports = {
-  entry: ['./src/js/main.js'],
+  context: path.join(__dirname, 'src'),
+  entry: ['./js/main.js'],
   // mode: 'none', // none development production
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'game.min.js',
   },
-  target: 'web'
+  target: 'web',
+  
+  plugins: [
+    new CopyWebpackPlugin([
+      { from: 'assets/',to:'assets/'}
+    ], {
+      ignore: [],
+      debug:'debug',
+      copyUnmodified: true
+    }),
+    new ImageminPlugin({
+      test: /\.(jpe?g|png|gif|svg)$/i ,
+      // optipng: {
+      //   optimizationLevel: 4
+      // },
+      pngquant: {
+        verbose:true,
+        quality: '80-90',
+      }
+    })
+  ]
 }

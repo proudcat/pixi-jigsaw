@@ -21,7 +21,6 @@
 * use `webpack` to debug the project at development phase, and combine, convert(to es5) and obfuscate `js` files at distribution phase.
 * the code is written in es8 and use `babel` to convert `es6+` to `es5`.
 * use `texturepacker` tool to create atlas.
-* use `gulp` script to combine all compile tools and build the project.
 * basic `css`and`html`knowledge, the `canvas` will auto fit the screen when viewport changed.
 
 ### File Structure
@@ -31,12 +30,8 @@
 * `webpack.common.js`: webpack common configuration file.
 * `webpack.dev.js`: webpack configuration file for development.
 * `webpack.prod.js`: webpack configuration file for produciton.
-* `gulpfile.js`:`gulp` configuration file.
 * `package.json`: `node` configuration file.
 
 
 ### Distribution
 * run `npm run build`command to `release` the project, all the files will copy into `dist` directory, all `.js` files will combined、converted to `es5` and obfuscated, all png files will be optimized.
-
-### TODO
-* remove gulp.

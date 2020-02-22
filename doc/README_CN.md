@@ -19,10 +19,9 @@
 
 ### 需要会的技术栈(你能学到什么)
 * 使用`pixi.js`v5版本。
-* 使用`webpack`开发调试，最终将所有`js`文件合并和混淆,并且利用tree shake将最终代码尺寸优化到最小(库里无用的模块不会被打进最终文件)。
+* 使用`webpack`开发调试，最终将所有`js`文件转成es5、合并、混淆,并且利用tree shake将最终代码尺寸优化到最小(库里无用的模块不会被打进最终文件),压缩图片。
 * 使用`babel`将代码最终转换为`es5`。
 * 使用`texturepacker`工具制作图集。
-* 构建脚本使用`gulp`，调用`webpack`合并混淆`js`文件和压缩图片等等。
 * 少量的`css`和`html`知识，当浏览器视口大小发生变化时候，利用`css`对`canvas`进行屏幕自适应。
 
 ### 目录及文件说明
@@ -32,7 +31,6 @@
 * `.webpack.common.js`文件: webpack公共脚本。
 * `.webpack.dev.js`文件: webpack开发配置脚本。
 * `.webpack.prod.js`文件: webpack发布配置脚本。
-* `.gulpfile.js`文件:`gulp`构建脚本，用于发布项目时候时候构建和优化整个项目。
 * `package.json`文件: `node`项目的配置文件。
 
 
