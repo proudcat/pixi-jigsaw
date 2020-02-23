@@ -6,6 +6,7 @@
 >这个例子已经被收入官方wiki的tutorials里面了:《[How to make jigsaw game](https://github.com/pixijs/pixi.js/wiki/v5-Resources#tutorials)》
 >
 >详细讲解可参考我的博客 [segmentfault思否](https://segmentfault.com/a/1190000021726866)
+>webpack搭建pixi.js开发环境可参考这个[pixi-webpack-demo](https://github.com/proudcat/pixi-webpack-demo)
 
 [体验地址](http://testactivity.goooku.com/ishop-demo/jigsaw/index.html) 
 
