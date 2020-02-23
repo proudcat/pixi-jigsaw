@@ -45,3 +45,30 @@ export function parseQueryString(url) {
 export function decodeURI(value) {
   return decodeURIComponent(value.replace(/\+/g, ' '))
 }
+
+export function getExtension(uri) {
+
+  let ext = uri
+
+  let queryIndex = uri.indexOf('?')
+  if(queryIndex>0){
+    ext = uri.substr(0,queryIndex)
+  }
+
+  let index = ext.lastIndexOf('.')
+  if (index != -1) {
+    ext = ext.substring(index + 1)
+  }
+  return ext
+}
+
+
+export function isVideo(uri) {
+  let ext = getExtension(uri)
+  return ['mp4', 'webm'].indexOf(ext) !== -1
+}
+
+export function isAudio(uri) {
+  let ext = getExtension(uri)
+  return ['mp3', 'ogg'].indexOf(ext) !== -1
+}
