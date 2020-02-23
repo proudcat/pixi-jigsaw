@@ -1,5 +1,5 @@
 const path = require('path')
-let HtmlPlugin = require('html-webpack-plugin')
+const HtmlPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const ImageminPlugin = require('imagemin-webpack-plugin').default
 
@@ -30,7 +30,8 @@ module.exports = {
         verbose:true,
         quality: '80-90',
       }
-    }),new HtmlPlugin({
+    })
+    ,new HtmlPlugin({
       file:path.join(__dirname,'dist','index.html'),
       template:'./index.html'
     })
