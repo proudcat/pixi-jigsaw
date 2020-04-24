@@ -1,5 +1,5 @@
 # Jigsaw Puzzle
->In this tutorial you’re going to find out how to make `pixi.js` with v5, how to utilize the latest `es` feature, how to separate `.js`files(`es module`), how to load resource, how to fit the screen automatically, how to play `sound` and `video`, how to split `layer` , how to `extends pixi class`,how to make `internationalization`, how to use `webpack` and `babel` to develop and distribute the game(optimize the image files, tree shake/combine/convert/obfuscate the `js` files) and so on.
+>In this tutorial you’re going to find out how to make `pixi.js` game with v5, how to utilize the latest `es` feature, how to separate `.js`files(`es module`), how to load resource, how to fit the screen automatically, how to play `sound` and `video`, how to split `layer` , how to `extends pixi class`,how to make `internationalization`, how to use `webpack` and `babel` to develop and distribute the game(optimize the image files, tree shake/combine/convert/obfuscate the `js` files) and so on.
 > 
 > The source code is well commented, hope you can enjoy it.
 > you can learn more about webpack in detail in this project[pixi-webpack-demo](https://github.com/proudcat/pixi-webpack-demo)
